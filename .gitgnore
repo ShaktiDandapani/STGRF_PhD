@@ -1,0 +1,9 @@
+*.dat
+*.txt
+*.csv
+*.xls
+*.xlsx
+*.pyc
+*.js
+*.css
+*.xml

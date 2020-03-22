@@ -1,0 +1,25 @@
+!Export nodal coordinates to CSV
+!NOTE:  *VWRITE command can only be executed from an external file by e.g /INPUT
+
+alls
+
+*CFOPEN,disp_nodes_new,txt
+
+*GET,num_nodes_,NODE,0,COUNT !Get the number of nodes
+*GET,node_,NODE,0,NUM,MIN !Get label of the first node
+
+*DO,i,1,num_nodes_,1
+  ! Define some parameters
+  *GET,nx_,NODE,node_,LOC,X
+  *GET,ny_,NODE,node_,LOC,Y
+  *GET,nz_,NODE,node_,LOC,Z
+    
+  ! Write line
+  *VWRITE,node_,nx_,ny_,nz_
+  (F8.0,',',E10.3,',',E10.3,',',E10.3)
+  
+  ! select the next node
+  *GET,node_,NODE,node_,NXTH
+  
+*ENDDO
+*CFCLOSE

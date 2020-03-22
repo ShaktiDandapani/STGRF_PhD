@@ -1,0 +1,41 @@
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:39:54
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/SOLU   
+FINISH  
+/PREP7  
+!*  
+ET,1,SOLID187   
+!*  
+CYL4,0,0,31.075, ,39.375
+ADELE,       1  
+FLST,2,6,4,ORDE,4   
+FITEM,2,1   
+FITEM,2,-3  
+FITEM,2,6   
+FITEM,2,-8  
+LDELE,P51X  
+LSTR,       5,       4  
+LSTR,       6,       1  
+lplot   
+FLST,2,4,4  
+FITEM,2,5   
+FITEM,2,1   
+FITEM,2,4   
+FITEM,2,2   
+AL,P51X 
+FLST,2,1,5,ORDE,1   
+FITEM,2,1   
+FLST,8,2,3  
+FITEM,8,5   
+FITEM,8,4   
+VROTAT,P51X, , , , , ,P51X, ,360,4, 
+

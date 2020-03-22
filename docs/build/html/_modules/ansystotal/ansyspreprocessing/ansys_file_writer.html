@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ansystotal.ansyspreprocessing.ansys_file_writer &mdash; STGRF 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> STGRF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html">STGRF preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html#module-ansystotal.ansyspreprocessing.ansys_file_reader">File Reader Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html#module-ansystotal.ansyspreprocessing.ansys_file_writer">File Writer Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspostprocessing.html">   Postprocessing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">STGRF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ansystotal.ansyspreprocessing.ansys_file_writer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ansystotal.ansyspreprocessing.ansys_file_writer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on 08.08.2016</span>
+
+<span class="sd">Class file containing methods to write ANSYS APDL .inp scripts for execution.</span>
+
+<span class="sd">Current implementation includes the HGO model and the neohookean model, considerations include</span>
+<span class="sd">1. Defining a method to obtain boundary conditions -&gt; defining nodal displacements.</span>
+<span class="sd">2. Cleaner implementation to save in directory of choice.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
+<span class="kn">import</span> <span class="nn">ansystotal.ansyspreprocessing.ansys_component_writer</span> <span class="k">as</span> <span class="nn">mw</span>
+<span class="kn">import</span> <span class="nn">ansystotal.ansyspreprocessing.ansys_file_reader</span> <span class="k">as</span> <span class="nn">afr</span>
+<span class="kn">import</span> <span class="nn">ansystotal.genericoperations.calculate_displacement_function</span> <span class="k">as</span> <span class="nn">cdf</span>
+
+<span class="c1"># noinspection PyPep8Naming</span>
+<div class="viewcode-block" id="AnsysInpWriter"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter">[docs]</a><span class="k">class</span> <span class="nc">AnsysInpWriter</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ANSYS apdl script generator based on the material required. \n</span>
+<span class="sd">    Current Implementation includes the neo-hookean material and \n</span>
+<span class="sd">    the exponential form HGO material formulation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">mesh_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>       <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span>      <span class="o">=</span> <span class="n">mesh_data</span>
+        <span class="c1"># The dictionaries are provided below using simple names</span>
+        <span class="k">if</span> <span class="n">mesh_data</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span>          <span class="o">=</span> <span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">elements</span>       <span class="o">=</span> <span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">write_tissue_strip_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+
+        <span class="c1"># Think about how you would go about setting the script up</span>
+        <span class="c1"># INP files to keep out</span>
+        <span class="c1">#   Create for a cube and extend to everything else</span>
+        <span class="c1"># 1. Preprocessing files (all these mesh descriptive files should be</span>
+        <span class="c1">#                         in ANSYSDATA folder)</span>
+        <span class="c1">#    -&gt; nodes</span>
+        <span class="c1">#    -&gt; elements</span>
+        <span class="c1">#    -&gt; lines</span>
+        <span class="c1">#    -&gt; areas</span>
+        <span class="c1">#    -&gt; volumes</span>
+        <span class="c1">#    -&gt; materials</span>
+        <span class="c1">#    -&gt; components (CM)</span>
+        <span class="c1">#</span>
+        <span class="c1">#    -&gt; Boundary Conditions (prep)</span>
+        <span class="c1">#</span>
+        <span class="c1"># 2. Solution(INP files)</span>
+        <span class="c1">#    -&gt; Setup</span>
+        <span class="c1">#    -&gt; applied loads</span>
+        <span class="c1">#    -&gt; SOLVER Commands</span>
+        <span class="c1">#    -&gt; SOLVE</span>
+        <span class="c1"># 3. Post processing</span>
+        <span class="c1">#    -&gt; include apdlscripts :)</span>
+
+        <span class="n">job_fname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>
+
+        <span class="n">prep_fname</span>            <span class="o">=</span> <span class="s1">&#39;prep.inp&#39;</span>
+        <span class="n">boundary_cond_fname</span>   <span class="o">=</span> <span class="s1">&#39;bcs.inp&#39;</span>
+        <span class="n">nodes_fname</span>           <span class="o">=</span> <span class="s1">&#39;nodes.inp&#39;</span>
+        <span class="n">elements_fname</span>        <span class="o">=</span> <span class="s1">&#39;elements.inp&#39;</span>
+        <span class="n">materials_fname</span>       <span class="o">=</span> <span class="s1">&#39;materials.inp&#39;</span>
+        <span class="n">solution_fname</span>        <span class="o">=</span> <span class="s1">&#39;solution.inp&#39;</span>
+        <span class="n">post_processing_fname</span> <span class="o">=</span> <span class="s1">&#39;post.inp&#39;</span>
+
+
+        <span class="c1"># Create remaining files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_prep_inp_file_tissue_strip</span><span class="p">(</span><span class="n">prep_fname</span><span class="p">)</span>
+
+        <span class="n">mat_values_file</span> <span class="o">=</span> <span class="s1">&#39;material_values_0.csv&#39;</span>
+
+        <span class="n">mat_writer</span> <span class="o">=</span> <span class="n">mw</span><span class="o">.</span><span class="n">DataWriter</span><span class="p">()</span>
+
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_nodes</span><span class="p">(</span><span class="n">nodes_fname</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_elements</span><span class="p">(</span><span class="n">elements_fname</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+
+        <span class="n">materials_dictionary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;materials&#39;</span><span class="p">]</span>
+        <span class="c1"># Here modify for skeletal muscle.</span>
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_material_ahyper_expo_musc</span><span class="p">(</span><span class="n">materials_fname</span><span class="p">,</span>
+                                                 <span class="n">mat_values_file</span><span class="p">,</span>
+                                                 <span class="n">materials_dictionary</span><span class="p">)</span>
+
+        <span class="c1"># Create Boundary Conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_bcs_tissue_strip_extension</span><span class="p">(</span><span class="n">boundary_cond_fname</span><span class="p">)</span>
+
+        <span class="n">disp_calculator</span> <span class="o">=</span> <span class="n">cdf</span><span class="o">.</span><span class="n">DisplacementCalculator</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+        <span class="n">displacement</span> <span class="o">=</span> <span class="n">disp_calculator</span><span class="o">.</span><span class="n">calculate_displacement</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;step_function&#39;</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_solu_inp_file_tissue_strip</span><span class="p">(</span><span class="n">solution_fname</span><span class="p">,</span> <span class="n">displacement</span><span class="p">)</span>
+        <span class="n">post_directory</span> <span class="o">=</span> <span class="s1">&#39;./libraries/ansysapdlscripts&#39;</span>
+        <span class="c1"># post_directory = &#39;ansysapdlscripts&#39;</span>
+        <span class="n">write_post_processes</span><span class="p">(</span><span class="n">post_processing_fname</span><span class="p">,</span> <span class="n">post_directory</span><span class="p">)</span>
+
+        <span class="c1"># Create the ANSYS job file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">job_fname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jfile</span><span class="p">:</span>
+            <span class="c1"># Change these to dynamically take in the variable names</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,prep,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,nodes,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,elements,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,materials,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,bcs,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,solution,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/INPUT,post,inp&#39;</span><span class="p">)</span>
+            <span class="n">jfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_prep_inp_file_tissue_strip</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="c1"># Template for everything ?</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">prep_file</span><span class="p">:</span>
+            <span class="n">prep_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/PREP7&#39;</span><span class="p">)</span>
+            <span class="n">prep_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/UNITS,MPA&#39;</span><span class="p">)</span>
+            <span class="n">prep_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ET,1,SOLID185&#39;</span><span class="p">)</span>
+            <span class="n">prep_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ET,2,SOLID186&quot;</span><span class="p">)</span>  <span class="c1"># 20 node solid element</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_solu_inp_file_tissue_cube</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">displacement</span><span class="p">):</span>
+
+        <span class="c1"># Calculate displacements using parameters dictionary and proceed</span>
+        <span class="c1"># Read in the file for displacement !</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">solu_file</span><span class="p">:</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/SOLU&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">NLGEOM,ON&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">NSEL,S,LOC,X,10&#39;</span><span class="p">)</span>  <span class="c1"># needs to be dynamic</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">D,ALL,UX,</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">displacement</span><span class="p">))</span>    <span class="c1"># needs to be dynamically read in</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="c1"># solu_file.write(&#39;\nNSEL,S,LOC,Z,4&#39;)  # needs to be dynamic</span>
+            <span class="c1"># solu_file.write(&#39;\nD,ALL,UZ,{}&#39;.format(displacement))    # needs to be dynamically read in</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NSUBST, 10, 100, 10, ON&quot;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">SOLVE&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">FINISH&#39;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_solu_inp_file_tissue_strip</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">displacement</span><span class="p">):</span>
+
+        <span class="c1"># Calculate displacements using parameters dictionary and proceed</span>
+        <span class="c1"># Read in the file for displacement !</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">solu_file</span><span class="p">:</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">/SOLU&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">NLGEOM,ON&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">NSEL,S,LOC,X,10&#39;</span><span class="p">)</span>  <span class="c1"># needs to be dynamic</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">D,ALL,UX,</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">displacement</span><span class="p">))</span>    <span class="c1"># needs to be dynamically read in</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="c1"># solu_file.write(&#39;\nNSEL,S,LOC,Z,4&#39;)  # needs to be dynamic</span>
+            <span class="c1"># solu_file.write(&#39;\nD,ALL,UZ,{}&#39;.format(displacement))    # needs to be dynamically read in</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NSUBST, 10, 100, 10, ON&quot;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">SOLVE&#39;</span><span class="p">)</span>
+            <span class="n">solu_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">FINISH&#39;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_bcs_tissue_strip_extension</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bc_file</span><span class="p">:</span>
+            <span class="c1"># bc_file.write(&#39;\nNSEL,S,LOC,Y,0&#39;)</span>
+            <span class="c1"># bc_file.write(&#39;\nD,ALL,UY,0&#39;)</span>
+            <span class="c1"># bc_file.write(&#39;\nALLSEL&#39;)</span>
+            <span class="c1">#</span>
+            <span class="n">bc_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">NSEL,S,LOC,X,0&#39;</span><span class="p">)</span>
+            <span class="n">bc_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">D,ALL,ALL,0&#39;</span><span class="p">)</span>
+            <span class="n">bc_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ALLSEL&#39;</span><span class="p">)</span>
+            <span class="c1">#</span>
+            <span class="c1"># bc_file.write(&#39;\nNSEL,S,LOC,Z,0&#39;)</span>
+            <span class="c1"># bc_file.write(&#39;\nD,ALL,UZ,0&#39;)</span>
+            <span class="c1"># bc_file.write(&#39;\nALLSEL&#39;)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes the ANSYS input file for the HGO model.. think about how to define the materials for</span>
+<span class="sd">    the various elements - fairly simple.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AnsysInpWriter.inp_writer_lv_hgo_model"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter.inp_writer_lv_hgo_model">[docs]</a>    <span class="k">def</span> <span class="nf">inp_writer_lv_hgo_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function/ method uses the other modules/ library to create a ansys simulation</span>
+<span class="sd">        script for a hgo material.</span>
+
+<span class="sd">        :param mat_constants:</span>
+<span class="sd">        :param fibres:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fs_file</span>         <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;fixed_support&#39;</span><span class="p">]</span>
+        <span class="n">base_inner_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;base_inner&#39;</span><span class="p">]</span>
+        <span class="n">pface_file</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;inner_surface&#39;</span><span class="p">]</span>
+        <span class="c1"># -------------------------------------------------------------------------------------------------------------#</span>
+        <span class="c1">#                                                                                                              #</span>
+        <span class="c1">#                                        Writing of the ANSYS inp File                                         #</span>
+        <span class="c1">#                                                                                                              #</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------ #</span>
+
+        <span class="n">input_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span>
+
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/PREP7 </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> /UNITS, MPA </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>           <span class="c1"># Set the units to MPa</span>
+
+        <span class="c1"># While we do define multiple element types, it is necessary to note</span>
+        <span class="c1"># that only one element type is used throughout the geometry</span>
+        <span class="c1"># depending on what original elemenst have been established.</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ET,1,SOLID185&quot;</span><span class="p">)</span>             <span class="c1"># 8 node solid element</span>
+
+        <span class="c1"># input_file.write(&quot;\nET,2,SOLID186&quot;)             # 20 node solid element</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">KEYOPT,20,6,1 !Use mixed u-P formulation to avoid locking&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;KEYOPT,20,2,3 !Use Simplified Enhanced Strain method&quot;</span><span class="p">)</span>
+
+        <span class="c1"># input_file.write(&quot;\nKEYOPT,2,3,0&quot;)</span>
+        <span class="c1"># input_file.write(&quot;\nKEYOPT,2,6,1&quot;)</span>
+
+        <span class="n">e_file</span>  <span class="o">=</span> <span class="s2">&quot;elements&quot;</span>
+        <span class="n">n_file</span>  <span class="o">=</span> <span class="s2">&quot;nodes&quot;</span>
+        <span class="n">m_file</span>  <span class="o">=</span> <span class="s2">&quot;materials&quot;</span>
+
+        <span class="n">e_file_inp</span>      <span class="o">=</span> <span class="n">e_file</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">n_file_inp</span>      <span class="o">=</span> <span class="n">n_file</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">m_file_inp</span>      <span class="o">=</span> <span class="n">m_file</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+
+        <span class="c1"># -------------------------------------------------------------------------------------------------------------#</span>
+        <span class="c1">#                                                                                                              #</span>
+        <span class="c1">#                              Create Node, Elements, Materials Input Files                                    #</span>
+        <span class="c1">#                                                                                                              #</span>
+        <span class="c1"># ------------------------------------------------------------------------------------------------------------ #</span>
+
+
+        <span class="n">mat_writer</span> <span class="o">=</span> <span class="n">mw</span><span class="o">.</span><span class="n">DataWriter</span><span class="p">()</span>
+
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_nodes</span><span class="p">(</span><span class="n">n_file_inp</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_elements</span><span class="p">(</span><span class="n">e_file_inp</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+
+        <span class="n">mat_values_file</span> <span class="o">=</span> <span class="s1">&#39;material_values_0.csv&#39;</span>
+
+        <span class="n">materials_dictionary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_data</span><span class="p">[</span><span class="s1">&#39;materials&#39;</span><span class="p">]</span>
+        <span class="c1"># read hgo from csv and include that in the</span>
+        <span class="n">mat_writer</span><span class="o">.</span><span class="n">write_material_ahyper_expo_lv</span><span class="p">(</span><span class="n">m_file_inp</span><span class="p">,</span>
+                                                 <span class="n">mat_values_file</span><span class="p">,</span>
+                                                 <span class="n">materials_dictionary</span><span class="p">)</span>
+
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">/INPUT,</span><span class="si">{}</span><span class="s2">,inp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m_file</span><span class="p">))</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALLSEL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT,</span><span class="si">{}</span><span class="s2">,inp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_file</span><span class="p">))</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALLSEL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT,</span><span class="si">{}</span><span class="s2">,inp&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e_file</span><span class="p">))</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALLSEL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Fixed Support</span>
+        <span class="n">comp_fs_name</span>        <span class="o">=</span> <span class="s2">&quot;fixedsupp&quot;</span>
+        <span class="n">comp_fs_file</span>        <span class="o">=</span> <span class="n">comp_fs_name</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">comp_fs_nodes_file</span>  <span class="o">=</span> <span class="n">fs_file</span>
+
+        <span class="n">comp_base_inner_name</span>       <span class="o">=</span> <span class="s2">&quot;baseinner&quot;</span>
+        <span class="n">comp_base_inner_file</span>       <span class="o">=</span> <span class="n">comp_base_inner_name</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">comp_base_inner_nodes_file</span> <span class="o">=</span> <span class="n">base_inner_file</span>
+
+        <span class="n">create_component</span><span class="p">(</span><span class="n">comp_fs_file</span><span class="p">,</span>
+                         <span class="n">comp_fs_nodes_file</span><span class="p">,</span>
+                         <span class="n">comp_fs_name</span><span class="p">)</span>
+
+        <span class="n">create_component</span><span class="p">(</span><span class="n">comp_base_inner_file</span><span class="p">,</span>
+                         <span class="n">comp_base_inner_nodes_file</span><span class="p">,</span>
+                         <span class="n">comp_base_inner_name</span><span class="p">)</span>
+
+        <span class="c1"># Set up pressure nodes</span>
+        <span class="n">comp_pres_name</span>          <span class="o">=</span> <span class="s2">&quot;pface&quot;</span>
+        <span class="n">comp_pres_file</span>          <span class="o">=</span> <span class="n">comp_pres_name</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">comp_pres_nodes_file</span>    <span class="o">=</span> <span class="n">pface_file</span>
+
+        <span class="n">create_component</span><span class="p">(</span><span class="n">comp_pres_file</span><span class="p">,</span>
+                         <span class="n">comp_pres_nodes_file</span><span class="p">,</span>
+                         <span class="n">comp_pres_name</span><span class="p">)</span>
+
+        <span class="c1"># get in the fixed support and pressure file</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">!Fixed Support Specification&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, </span><span class="si">%s</span><span class="s2">, inp&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">comp_fs_name</span><span class="p">))</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">D, </span><span class="si">%s</span><span class="s2">, ALL, 0&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">comp_fs_name</span><span class="p">))</span>
+
+        <span class="c1"># Inner base nodes rolling support file</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!Inner Base Nodes Specification&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, </span><span class="si">%s</span><span class="s2">, inp&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">comp_base_inner_name</span><span class="p">))</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">D, </span><span class="si">%s</span><span class="s2">, UZ, 0&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">comp_base_inner_name</span><span class="p">))</span> <span class="c1"># for rolling support</span>
+        <span class="c1"># input_file.write(&quot;\nD, %s, ALL, 0&quot; % (comp_base_inner_name))   # for fixed support</span>
+
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!Application of pressure to inner_surfaces&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, </span><span class="si">%s</span><span class="s2">, inp&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">comp_pres_name</span><span class="p">))</span>
+
+        <span class="n">sol_f_name</span>  <span class="o">=</span> <span class="s2">&quot;solu&quot;</span>
+        <span class="n">sol_file</span>   <span class="o">=</span> <span class="n">sol_f_name</span> <span class="o">+</span> <span class="s2">&quot;.inp&quot;</span>
+        <span class="n">write_solution_file</span><span class="p">(</span><span class="n">sol_file</span><span class="p">,</span> <span class="mf">1.33e-3</span><span class="p">,</span> <span class="n">comp_pres_name</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!Solutions File&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, </span><span class="si">%s</span><span class="s2">, inp&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sol_f_name</span><span class="p">))</span>
+
+        <span class="c1"># Directory in which post processing scripts are stored.</span>
+        <span class="n">post_directory</span> <span class="o">=</span> <span class="s1">&#39;./libraries/ansysapdlscripts&#39;</span>
+
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!Post Processing &quot;</span><span class="p">)</span>
+        <span class="n">write_post_processes</span><span class="p">(</span><span class="s1">&#39;post_p.inp&#39;</span><span class="p">,</span> <span class="n">post_directory</span><span class="p">)</span>
+
+        <span class="n">input_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, post_p, inp&quot;</span><span class="p">)</span>
+        <span class="n">input_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+<span class="c1"># Methods outside the writer class.</span>
+<div class="viewcode-block" id="write_solution_file"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_writer.write_solution_file">[docs]</a><span class="k">def</span> <span class="nf">write_solution_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">region</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes out the solution section of the ansys apdl script.</span>
+
+<span class="sd">    :param file_name:</span>
+<span class="sd">    :param pressure:</span>
+<span class="sd">    :param region:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sol_file</span><span class="p">:</span>
+        <span class="c1"># Solution - put it in a different file</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/SOLU&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ANTYPE, STATIC&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NLGEOM, ON&quot;</span><span class="p">)</span>
+        <span class="c1"># sol_file.write(&quot;\nARCLEN, ON&quot;)              # Using the arc length method for newton-rahpson analysis</span>
+        <span class="c1"># sol_file.write(&quot;\nNROPT, FULL, , OFF&quot;)    # This command instructs ANSYS to use the &#39;Full&#39; Newton Raphson algorithm</span>
+                                                    <span class="c1"># and prevents it from using the &#39;Adaptive Descent&#39; algorithm.</span>
+        <span class="c1"># sol_file.write(&quot;\nCNCHECK, AUTO&quot;)</span>
+        <span class="c1"># sol_file.write(&quot;\nSOLCONTROL, ON&quot;)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PRED,ON,,ON&quot;</span><span class="p">)</span>             <span class="c1"># This makes ANSYS from use the converged solution at the</span>
+                                                    <span class="c1"># last substep to estimate the solution for the current substep.</span>
+        <span class="c1"># sol_file.write(&quot;\nCNVTOL,F,,,,-1&quot;)</span>
+        <span class="c1"># sol_file.write(&quot;\nBCSOPTION, ,INCORE&quot;)</span>
+        <span class="c1"># sol_file.write(&quot;\nNROPT,MODI\n&quot;)</span>
+
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NSUBST, 10, 100, 10, ON&quot;</span><span class="p">)</span>
+
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">!Apply pressure to all nodes&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SF, </span><span class="si">%s</span><span class="s2">, PRES, </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">pressure</span><span class="p">))</span>
+
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALLSEL&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SOLVE&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">FINISH&quot;</span><span class="p">)</span>
+        <span class="n">sol_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="write_post_processes"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_writer.write_post_processes">[docs]</a><span class="k">def</span> <span class="nf">write_post_processes</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes the post processing commands for apdl script.</span>
+
+<span class="sd">    :param file_name:</span>
+<span class="sd">    :param directory:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">post_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!Post Processing Commands below:&quot;</span><span class="p">)</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">!===============================!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/POST1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, get_disp_nodes,inp,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory</span><span class="p">))</span>
+    <span class="c1"># post_file.write(&quot;\nRSYS,2&quot;) # change to spherical co-ordinate system ????</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, get_stresses,inp,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory</span><span class="p">))</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">/INPUT, get_strains_comp,inp,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory</span><span class="p">))</span>
+
+    <span class="c1"># input_file.write(&quot;\n/OUT&quot;)</span>
+    <span class="n">post_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">FINISH&quot;</span><span class="p">)</span>
+
+    <span class="n">post_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="create_component"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_writer.create_component">[docs]</a><span class="k">def</span> <span class="nf">create_component</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+                     <span class="n">nodes_file</span><span class="p">,</span>
+                     <span class="n">component_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A component is created, specifically a named selection in terms of ANSYS wb.</span>
+
+
+<span class="sd">    :param filename:</span>
+<span class="sd">    :param nodes_file:</span>
+<span class="sd">    :param component_name:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Opens file to write in components from filename</span>
+    <span class="n">comp_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">afr</span><span class="o">.</span><span class="n">ListReader</span><span class="p">()</span>
+
+    <span class="c1"># Reads nodes from nodes_file</span>
+    <span class="n">nodes</span>  <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_nodes</span><span class="p">(</span><span class="n">nodes_file</span><span class="p">)</span>
+    <span class="n">nodes_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes_list</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">comp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NSEL,S,NODE,,</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">nodes_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">comp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NSEL,A,NODE,,</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">nodes_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">comp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CM, </span><span class="si">%s</span><span class="s2">, NODE&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">component_name</span><span class="p">))</span>
+    <span class="n">comp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALLSEL&quot;</span><span class="p">)</span>
+
+    <span class="n">comp_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shaktidhar Dandapani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

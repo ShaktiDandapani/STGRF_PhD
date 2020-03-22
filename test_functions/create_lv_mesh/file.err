@@ -1,0 +1,95 @@
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:38:29
+
+ *** WARNING ***                         CP =       5.734   TIME= 15:39:41
+ /CLEAR is not a recognized PREP7 command, abbreviation, or macro.       
+  This command will be ignored.                                          
+
+ *** ERROR ***                           CP =       5.859   TIME= 15:39:41
+ Cannot create line between coincident keypoints 3 and 4.                
+
+ *** ERROR ***                           CP =       7.578   TIME= 15:40:44
+ Cannot create line between coincident keypoints 3 and 4.                
+
+ *** WARNING ***                         CP =       9.812   TIME= 15:42:22
+ K is not a recognized BEGIN command, abbreviation, or macro.  This      
+ command will be ignored.                                                
+
+ *** WARNING ***                         CP =      10.766   TIME= 15:43:34
+ Specified range of 0 to 0 is not permitted.  The KDELE command is       
+ ignored.                                                                
+
+ *** WARNING ***                         CP =      10.938   TIME= 15:43:40
+ Entity 4 is undefined.  The KDELE command is ignored.                   
+
+ *** WARNING ***                         CP =      11.688   TIME= 15:44:10
+ K is not a recognized BEGIN command, abbreviation, or macro.  This      
+ command will be ignored.                                                
+
+ *** WARNING ***                         CP =      11.719   TIME= 15:44:10
+ K is not a recognized BEGIN command, abbreviation, or macro.  This      
+ command will be ignored.                                                
+
+ *** WARNING ***                         CP =      11.750   TIME= 15:44:10
+ K is not a recognized BEGIN command, abbreviation, or macro.  This      
+ command will be ignored.                                                
+
+ *** WARNING ***                         CP =      11.766   TIME= 15:44:10
+ K is not a recognized BEGIN command, abbreviation, or macro.  This      
+ command will be ignored.                                                
+
+ *** ERROR ***                           CP =      14.281   TIME= 15:45:43
+ Cannot create line between coincident keypoints 3 and 4.                
+
+ *** WARNING ***                         CP =      14.828   TIME= 15:46:11
+ /CLEAR is not a recognized PREP7 command, abbreviation, or macro.       
+  This command will be ignored.                                          
+
+ *** ERROR ***                           CP =      15.031   TIME= 15:46:11
+ Cannot create line between coincident keypoints 3 and 4.                
+
+ *** WARNING ***                         CP =      16.703   TIME= 15:46:48
+ /CLEAR is not a recognized PREP7 command, abbreviation, or macro.       
+  This command will be ignored.                                          
+
+ *** WARNING ***                         CP =      44.922   TIME= 15:54:35
+ The item label Z is not recognized by the NSEL command.                 
+  The NSEL command is ignored.                                           
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:24:56
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:28:40
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:35:07
+
+ *** ERROR ***                           CP =       7.203   TIME= 11:36:49
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =       7.531   TIME= 11:36:55
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =      10.547   TIME= 11:38:29
+ Keypoint 3 belongs to line 2 and cannot be moved.                       
+
+ *** ERROR ***                           CP =      10.734   TIME= 11:38:32
+ Keypoint 3 belongs to line 2 and cannot be moved.                       
+
+ *** ERROR ***                           CP =      10.766   TIME= 11:38:34
+ Keypoint 3 belongs to line 2 and cannot be moved.                       
+
+ *** ERROR ***                           CP =      10.797   TIME= 11:38:35
+ Keypoint 3 belongs to line 2 and cannot be moved.                       
+
+ *** ERROR ***                           CP =      10.844   TIME= 11:38:35
+ Keypoint 3 belongs to line 2 and cannot be moved.                       
+
+ *** ERROR ***                           CP =      13.656   TIME= 11:39:38
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =      13.719   TIME= 11:39:39
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =      13.859   TIME= 11:39:43
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =      13.969   TIME= 11:39:46
+ Viewing direction is parallel to working plane in window 1.             
+
+ *** ERROR ***                           CP =      14.234   TIME= 11:39:51
+ Viewing direction is parallel to working plane in window 1.             

@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>STGRF preprocessing &mdash; STGRF 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="STGRF postprocessing" href="ansyspostprocessing.html" />
+    <link rel="prev" title="Welcome to STGRF’s documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> STGRF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">STGRF preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-ansystotal.ansyspreprocessing.ansys_file_reader">File Reader Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-ansystotal.ansyspreprocessing.ansys_file_writer">File Writer Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ansyspostprocessing.html">   Postprocessing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">STGRF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>STGRF preprocessing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ansyspreprocessing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stgrf-preprocessing">
+<h1>STGRF preprocessing<a class="headerlink" href="#stgrf-preprocessing" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="module-ansystotal.ansyspreprocessing.ansys_file_reader">
+<span id="file-reader-class"></span><h1>File Reader Class<a class="headerlink" href="#module-ansystotal.ansyspreprocessing.ansys_file_reader" title="Permalink to this headline">¶</a></h1>
+<p>Created on 08.08.2016</p>
+<p>Class file, containing methods/ functions to read in nodes and elements from
+the nlist, elist exported from ANSYS APDL.</p>
+<p>Current implementation includes reading in elements containing 4, 8 and 10 nodes.
+Regular expressions are used to obtain the values from the .txt/.lis files</p>
+<p>Regular expressions for elements and nodes can be cleaned up, like the stress retrieval regex.</p>
+<dl class="class">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader">
+<em class="property">class </em><code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">ListReader</code><span class="sig-paren">(</span><em>n_file_name=None</em>, <em>e_file_name=None</em>, <em>a_file_name=None</em>, <em>kp_file_name=None</em>, <em>l_file_name=None</em>, <em>v_file_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for reading in nodes and elements. Individual objects for multiple files :)</p>
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_a_lines">
+<code class="descname">read_a_lines</code><span class="sig-paren">(</span><em>l_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader.read_a_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_a_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a lines file with the line number and the keypoints associated with it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>l_file</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_areas">
+<code class="descname">read_areas</code><span class="sig-paren">(</span><em>a_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader.read_areas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_areas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an area dictionary with the area number and associated lines</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>a_file</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_elements">
+<code class="descname">read_elements</code><span class="sig-paren">(</span><em>e_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader.read_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in an ANSYS apdl output formatted element list text file.</p>
+<p>Provides a dictionary with the relevant element connectivity</p>
+<p>information.</p>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read_elements</span><span class="p">(</span><span class="s2">&quot;elist.dat&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Args:</p>
+<blockquote>
+<div><p>filename (str): Enter the file name for the ansys elist input.</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>element_dictionary (dict): an element dictionary for use and manipulation in python.
+co-ordinates as follows - {el_no: [[node_0, ….., node_n]]}</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_key_points">
+<code class="descname">read_key_points</code><span class="sig-paren">(</span><em>kp_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader.read_key_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_key_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a kp dictionary with kp number and co-ordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kp_file</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_nodes">
+<code class="descname">read_nodes</code><span class="sig-paren">(</span><em>n_file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#ListReader.read_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the nodes in the file opened in a script.</p>
+<p>Returns a clean version of the node numbers with</p>
+<p>their co-ordinates</p>
+<p>Args:</p>
+<blockquote>
+<div><p>n_file_name (str): Name of the file containing ANSYS apdl formatted node description.</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>node_coordinate_structure (dict): A dictionary containing the node numbers and node</p>
+<p>co-ordinates as follows - {node_no: [[x, y, z]]}</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_fibroblast_stretch_file">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_fibroblast_stretch_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_fibroblast_stretch_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_fibroblast_stretch_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a fibroblast file and provides a dictionary back as a data structure containing the information</p>
+<p>{e_no: lambda_f, lambda_f^R, lambda_tissue}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_hgo_material</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_hgo_material"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a csv file containing hgo material information about a mesh
+and returns a dictionary to be further processed in a script.</p>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read_hgo_material</span><span class="p">(</span><span class="s2">&quot;material_values.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename(str): a csv file containing material information</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>material_dictionary(dict):  dictionary structure containing all material</dt><dd><p>information in one neat variable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_musc">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_hgo_material_musc</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_hgo_material_musc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_musc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a csv file containing hgo material information about a mesh
+and returns a dictionary to be further processed in a script.</p>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read_hgo_material</span><span class="p">(</span><span class="s2">&quot;material_values.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename(str): a csv file containing material information</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>material_dictionary(dict):  dictionary structure containing all material</dt><dd><p>information in one neat variable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_original">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_hgo_material_original</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_hgo_material_original"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_original" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a csv file containing hgo material information about a mesh
+and returns a dictionary to be further processed in a script.</p>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">read_hgo_material</span><span class="p">(</span><span class="s2">&quot;material_values.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename(str): a csv file containing material information</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>material_dictionary(dict):  dictionary structure containing all material</dt><dd><p>information in one neat variable.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_strain_output">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_strain_output</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_strain_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_strain_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in all the strain values from the Strain output file
+and provides an output of the Strain tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_reader.read_stress_file">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_reader.</code><code class="descname">read_stress_file</code><span class="sig-paren">(</span><em>stress_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_reader.html#read_stress_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_reader.read_stress_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Created on 26.02.2017, 22:08</p>
+<p>&#64;author Shaktidhar Dandapani</p>
+<p>The current function reads in the equivalent stresses from an ansys stress result file.</p>
+<p>This could be used in the remodelling script to find the differences in the dictionaries</p>
+<p>of step 0 and step n. Which could be used as a remodelling parameter for the material</p>
+<p>properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stress_file</strong> – input the file name of the stress results file:)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary of elemental average equivalent stresses from nodes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ansystotal.ansyspreprocessing.ansys_file_writer">
+<span id="file-writer-class"></span><h1>File Writer Class<a class="headerlink" href="#module-ansystotal.ansyspreprocessing.ansys_file_writer" title="Permalink to this headline">¶</a></h1>
+<p>Created on 08.08.2016</p>
+<p>Class file containing methods to write ANSYS APDL .inp scripts for execution.</p>
+<p>Current implementation includes the HGO model and the neohookean model, considerations include
+1. Defining a method to obtain boundary conditions -&gt; defining nodal displacements.
+2. Cleaner implementation to save in directory of choice.</p>
+<dl class="class">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter">
+<em class="property">class </em><code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_writer.</code><code class="descname">AnsysInpWriter</code><span class="sig-paren">(</span><em>filename=None</em>, <em>mesh_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_writer.html#AnsysInpWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>ANSYS apdl script generator based on the material required.</p>
+<p>Current Implementation includes the neo-hookean material and</p>
+<p>the exponential form HGO material formulation.</p>
+<dl class="method">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter.inp_writer_lv_hgo_model">
+<code class="descname">inp_writer_lv_hgo_model</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_writer.html#AnsysInpWriter.inp_writer_lv_hgo_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_writer.AnsysInpWriter.inp_writer_lv_hgo_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function/ method uses the other modules/ library to create a ansys simulation
+script for a hgo material.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat_constants</strong> – </p></li>
+<li><p><strong>fibres</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_writer.create_component">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_writer.</code><code class="descname">create_component</code><span class="sig-paren">(</span><em>filename</em>, <em>nodes_file</em>, <em>component_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_writer.html#create_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_writer.create_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>A component is created, specifically a named selection in terms of ANSYS wb.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – </p></li>
+<li><p><strong>nodes_file</strong> – </p></li>
+<li><p><strong>component_name</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_writer.write_post_processes">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_writer.</code><code class="descname">write_post_processes</code><span class="sig-paren">(</span><em>file_name</em>, <em>directory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_writer.html#write_post_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_writer.write_post_processes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the post processing commands for apdl script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – </p></li>
+<li><p><strong>directory</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ansystotal.ansyspreprocessing.ansys_file_writer.write_solution_file">
+<code class="descclassname">ansystotal.ansyspreprocessing.ansys_file_writer.</code><code class="descname">write_solution_file</code><span class="sig-paren">(</span><em>file_name</em>, <em>pressure</em>, <em>region</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ansystotal/ansyspreprocessing/ansys_file_writer.html#write_solution_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ansystotal.ansyspreprocessing.ansys_file_writer.write_solution_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes out the solution section of the ansys apdl script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> – </p></li>
+<li><p><strong>pressure</strong> – </p></li>
+<li><p><strong>region</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ansyspostprocessing.html" class="btn btn-neutral float-right" title="STGRF postprocessing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to STGRF’s documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shaktidhar Dandapani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

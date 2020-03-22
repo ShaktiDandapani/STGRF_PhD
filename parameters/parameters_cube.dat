@@ -1,0 +1,10 @@
+time_period=10
+number_of_iterations=20
+beta_t=0.0
+beta_m=0.0
+init_time=1
+max_time=5
+iteration=0
+init_disp=0.5
+max_disp=1
+step_function=single-ramp

@@ -1,0 +1,56 @@
+ASEL, s, , , 13
+ASEL, a, , , 18
+ASEL, a, , , 22
+ASEL, a, , , 26
+ASEL, a, , , 30
+ASEL, a, , , 34
+ASEL, a, , , 38
+ASEL, a, , , 42
+ASEL, a, , , 46
+ASEL, a, , , 50
+ASEL, a, , , 54
+ASEL, a, , , 59
+ASEL, a, , , 61
+ASEL, a, , , 66
+ASEL, a, , , 70
+ASEL, a, , , 74
+ASEL, a, , , 78
+ASEL, a, , , 82
+ASEL, a, , , 86
+ASEL, a, , , 90
+
+ASEL, a, , , 94
+ASEL, a, , , 98
+ASEL, a, , , 102
+ASEL, a, , , 107
+ASEL, a, , , 109
+ASEL, a, , , 114
+ASEL, a, , , 118
+ASEL, a, , , 122
+ASEL, a, , , 126
+ASEL, a, , , 130
+ASEL, a, , , 134
+ASEL, a, , , 138
+ASEL, a, , , 142
+ASEL, a, , , 146
+ASEL, a, , , 150
+ASEL, a, , , 155
+ASEL, a, , , 157
+ASEL, a, , , 161
+ASEL, a, , , 164
+ASEL, a, , , 167
+
+ASEL, a, , , 170
+ASEL, a, , , 173
+ASEL, a, , , 176
+ASEL, a, , , 179
+ASEL, a, , , 182
+ASEL, a, , , 185
+ASEL, a, , , 188
+ASEL, a, , , 192
+
+
+CM, INNER_SURFACE, AREA
+NSLA, S, 1
+NLIST
+ALLSEL

@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ansystotal.ansyspreprocessing.ansys_file_reader &mdash; STGRF 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> STGRF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html">STGRF preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html#module-ansystotal.ansyspreprocessing.ansys_file_reader">File Reader Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspreprocessing.html#module-ansystotal.ansyspreprocessing.ansys_file_writer">File Writer Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ansyspostprocessing.html">   Postprocessing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">STGRF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>ansystotal.ansyspreprocessing.ansys_file_reader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ansystotal.ansyspreprocessing.ansys_file_reader</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on 08.08.2016</span>
+
+<span class="sd">Class file, containing methods/ functions to read in nodes and elements from</span>
+<span class="sd">the nlist, elist exported from ANSYS APDL.</span>
+
+<span class="sd">Current implementation includes reading in elements containing 4, 8 and 10 nodes.</span>
+<span class="sd">Regular expressions are used to obtain the values from the .txt/.lis files</span>
+
+<span class="sd">Regular expressions for elements and nodes can be cleaned up, like the stress retrieval regex.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">ansystotal.genericoperations.mesh_information_structures</span> <span class="k">as</span> <span class="nn">mo</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="c1"># noinspection PyPep8Naming</span>
+<div class="viewcode-block" id="ListReader"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader">[docs]</a><span class="k">class</span> <span class="nc">ListReader</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    \n</span>
+<span class="sd">    Class for reading in nodes and elements. Individual objects for multiple files :)</span>
+<span class="sd">    \n</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">e_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">a_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">kp_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">l_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">v_file_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_file_name</span>  <span class="o">=</span> <span class="n">n_file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_file_name</span>  <span class="o">=</span> <span class="n">e_file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a_file_name</span>  <span class="o">=</span> <span class="n">a_file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp_file_name</span> <span class="o">=</span> <span class="n">kp_file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l_file_name</span>  <span class="o">=</span> <span class="n">l_file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v_file_name</span>  <span class="o">=</span> <span class="n">v_file_name</span>
+
+<div class="viewcode-block" id="ListReader.read_nodes"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">read_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_file_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the nodes in the file opened in a script.\n</span>
+<span class="sd">        Returns a clean version of the node numbers with\n</span>
+<span class="sd">        their co-ordinates</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">		</span>
+<span class="sd">            n_file_name (str): Name of the file containing ANSYS apdl formatted node description.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">		</span>
+<span class="sd">            node_coordinate_structure (dict): A dictionary containing the node numbers and node\n</span>
+<span class="sd">            co-ordinates as follows - {node_no: [[x, y, z]]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Errors include - fileNotFound, InvalidParameter to int/float, invalid array index.</span>
+        <span class="c1"># Empty line given regex mismatch.</span>
+        <span class="k">if</span> <span class="n">n_file_name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_file_name</span> <span class="o">=</span> <span class="n">n_file_name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_file_name</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">n_file_name</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="n">node_coordinate_structure</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+        <span class="n">expr_nodeLine</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*([0-9]+)&quot;</span><span class="p">)</span>
+        <span class="n">expr_text</span>     <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+[A-Z]+\s+&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">expr_nodeLine</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">expr_text</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+                <span class="c1"># strip away the end character on the line string</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">clean_line</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+
+                <span class="n">node_number</span> <span class="o">=</span> <span class="n">clean_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># .replace(&#39;.&#39;,&#39;&#39;)</span>
+                <span class="n">node_number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">node_number</span><span class="p">)</span>
+
+                <span class="c1"># Create a Point class object to represent the node</span>
+                <span class="c1"># and store in the dictionary using its label and coordinates</span>
+                <span class="n">point</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node_number</span><span class="p">)))</span>
+                <span class="n">node_coordinate_structure</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">get_label</span><span class="p">())]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">point</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">node_coordinate_structure</span></div>
+
+<div class="viewcode-block" id="ListReader.read_elements"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_elements">[docs]</a>    <span class="k">def</span> <span class="nf">read_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads in an ANSYS apdl output formatted element list text file.\n</span>
+<span class="sd">        Provides a dictionary with the relevant element connectivity\n</span>
+<span class="sd">        information.</span>
+
+<span class="sd">        Example usage:</span>
+<span class="sd">		</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            read_elements(&quot;elist.dat&quot;)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">		</span>
+<span class="sd">            filename (str): Enter the file name for the ansys elist input.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">		</span>
+<span class="sd">            element_dictionary (dict): an element dictionary for use and manipulation in python.</span>
+<span class="sd">            co-ordinates as follows - {el_no: [[node_0, ....., node_n]]}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">el_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">e_file</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+        <span class="n">el_line</span> <span class="o">=</span> <span class="n">el_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">match_1</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+([0-9]+)\s+&quot;</span>
+        <span class="n">expr_text</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+[A-Z]+\s+&quot;</span>
+
+        <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">match_1</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+
+        <span class="n">element_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+        <span class="n">clean_content</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">refined_content</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">el_line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">expr_text</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+                <span class="n">filtered_line</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)))</span>
+                <span class="n">clean_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filtered_line</span><span class="p">)</span>
+
+        <span class="c1"># can close the el_file here as all the rest is poured into clean_content</span>
+        <span class="n">el_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># The code below needs refining</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clean_content</span><span class="p">)):</span>
+            <span class="c1"># First check if 8 nodes exist in ansys output file for elist.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="ow">is</span> <span class="mi">14</span><span class="p">:</span>
+                <span class="n">refined_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="ow">is</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">refined_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">14</span><span class="p">:</span>
+                <span class="n">refined_content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">clean_content</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">element_line</span> <span class="ow">in</span> <span class="n">refined_content</span><span class="p">:</span>
+            <span class="n">nodes_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">element_line</span><span class="p">)):</span>
+                <span class="n">nodes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">element_line</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">element_dictionary</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">element_line</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="p">[</span><span class="n">nodes_list</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">element_dictionary</span></div>
+
+<div class="viewcode-block" id="ListReader.read_a_lines"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_a_lines">[docs]</a>    <span class="k">def</span> <span class="nf">read_a_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a lines file with the line number and the keypoints associated with it.</span>
+
+<span class="sd">        :param l_file:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">l_file</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">l_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="n">cleaned_content</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">lines_kp_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="c1"># line number : [kp list]</span>
+
+        <span class="n">expr_lineLine</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+([0-9]+)&quot;</span><span class="p">)</span>
+        <span class="n">expr_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;s+[A-Z]+\s&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">expr_lineLine</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">expr_text</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>  <span class="c1"># strip away the end character on the line string</span>
+                <span class="n">cleaned_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)))</span>  <span class="c1"># strip the spaces away</span>
+
+        <span class="n">l_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">lines_kp_dict</span></div>
+
+<div class="viewcode-block" id="ListReader.read_areas"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_areas">[docs]</a>    <span class="k">def</span> <span class="nf">read_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an area dictionary with the area number and associated lines</span>
+
+<span class="sd">        :param a_file: </span>
+<span class="sd">        :return: </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">a_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">a_file</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">a_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="n">cleaned_content</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">areas_line_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="c1"># line number : [kp list]</span>
+
+        <span class="n">expr_areaLine</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+([0-9]+)&quot;</span><span class="p">)</span>
+        <span class="n">expr_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;s+[A-Z]+\s&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">expr_areaLine</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">expr_text</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>  <span class="c1"># strip away the end character on the line string</span>
+                <span class="n">cleaned_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)))</span>  <span class="c1"># strip the spaces away</span>
+
+        <span class="k">for</span> <span class="n">clean_line</span> <span class="ow">in</span> <span class="n">cleaned_content</span><span class="p">:</span>
+            <span class="n">area_number</span> <span class="o">=</span> <span class="n">clean_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">areas_line_dict</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">area_number</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">5</span><span class="p">])])</span>
+
+        <span class="n">a_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">areas_line_dict</span></div>
+
+<div class="viewcode-block" id="ListReader.read_key_points"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.ListReader.read_key_points">[docs]</a>    <span class="k">def</span> <span class="nf">read_key_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp_file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns a kp dictionary with kp number and co-ordinates</span>
+
+<span class="sd">        :param kp_file: </span>
+<span class="sd">        :return: </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">kp_file</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">k_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+        <span class="n">cleaned_content</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">keypoint_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+        <span class="n">expr_kpLine</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+([0-9]+)&quot;</span><span class="p">)</span>
+        <span class="n">expr_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;s+[A-Z]+\s&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">expr_kpLine</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">expr_text</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>  <span class="c1"># strip away the end character on the line string</span>
+                <span class="n">cleaned_content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)))</span>  <span class="c1"># strip the spaces away</span>
+
+        <span class="k">for</span> <span class="n">clean_line</span> <span class="ow">in</span> <span class="n">cleaned_content</span><span class="p">:</span>
+            <span class="n">kp_number</span> <span class="o">=</span> <span class="n">clean_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">keypoint_dict</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">kp_number</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">clean_line</span><span class="p">[</span><span class="mi">3</span><span class="p">])])</span>
+
+        <span class="n">k_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">keypoint_dict</span></div>
+
+    <span class="k">def</span> <span class="nf">volumes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">areas_dict</span><span class="p">):</span>
+
+        <span class="n">area_number</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">areas_dict</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">():</span>
+            <span class="n">area_number</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="n">vol_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="c1"># Single volume for now .</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">area_number</span><span class="p">)):</span>
+            <span class="n">vol_dict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">area_number</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">vol_dict</span></div>
+
+
+<span class="c1"># noinspection PyPep8</span>
+<div class="viewcode-block" id="read_stress_file"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_stress_file">[docs]</a><span class="k">def</span> <span class="nf">read_stress_file</span><span class="p">(</span><span class="n">stress_file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Created on 26.02.2017, 22:08</span>
+
+<span class="sd">    @author Shaktidhar Dandapani</span>
+
+<span class="sd">    The current function reads in the equivalent stresses from an ansys stress result file.\n</span>
+<span class="sd">    This could be used in the remodelling script to find the differences in the dictionaries\n</span>
+<span class="sd">    of step 0 and step n. Which could be used as a remodelling parameter for the material\n</span>
+<span class="sd">    properties.\n</span>
+
+
+<span class="sd">    :param stress_file: input the file name of the stress results file:)</span>
+<span class="sd">    :return: dictionary of elemental average equivalent stresses from nodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Dictionary to contain: {&#39;element_number&#39; : stress_value}</span>
+    
+    <span class="n">s_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">stress_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+    <span class="n">numerics_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+[0-9]&quot;</span>
+    <span class="n">element_number_line</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^\s+ELEMENT&quot;</span>
+    <span class="n">string_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[A-Z]*E+&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">s_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">stress_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    
+
+    <span class="n">node_counter</span>   <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_s11</span>      <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">element_number</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">element_number_line</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="n">element_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">element_line</span><span class="p">))</span>
+            <span class="n">element_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element_line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="c1"># Reset node variables</span>
+            <span class="n">node_counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">total_s11</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">numerics_pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string_pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+
+            <span class="n">node_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="n">line_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_content</span><span class="p">)</span>
+
+            <span class="c1"># 1. Now add the stresses needed to a list</span>
+            <span class="c1"># 2. Average the list</span>
+            <span class="c1"># 3. Use the return value outside the if loop to</span>
+            <span class="c1">#    insert {element_number : avg_stress}</span>
+            <span class="c1"># 2 -&gt; 2nd principal stress</span>
+
+            <span class="n">sigma_11</span>    <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">total_s11</span>   <span class="o">+=</span> <span class="n">sigma_11</span>
+
+            <span class="c1"># Average first principal stress in that element based on nodal stresses</span>
+            <span class="n">avg_stress</span> <span class="o">=</span> <span class="n">total_s11</span> <span class="o">/</span> <span class="n">node_counter</span>
+            <span class="n">stress_dictionary</span><span class="p">[</span><span class="n">element_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg_stress</span>
+
+    <span class="n">s_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">stress_dictionary</span></div>
+
+
+<div class="viewcode-block" id="read_hgo_material"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material">[docs]</a><span class="k">def</span> <span class="nf">read_hgo_material</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in a csv file containing hgo material information about a mesh</span>
+<span class="sd">    and returns a dictionary to be further processed in a script.</span>
+
+<span class="sd">    Example usage:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        read_hgo_material(&quot;material_values.csv&quot;)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename(str): a csv file containing material information</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        material_dictionary(dict):  dictionary structure containing all material</span>
+<span class="sd">                                    information in one neat variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">material_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">reader</span>     <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Cleanly instruct the csv reader to skip the header line</span>
+        <span class="c1"># this has been done in order to maintain a header line</span>
+        <span class="c1"># so as to be able to understand the csv file when opened</span>
+        <span class="c1"># manually</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">element_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">k1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">k2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">k3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">k4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">av_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+            <span class="n">av_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+            <span class="n">av_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+            <span class="n">bv_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+            <span class="n">bv_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+            <span class="n">bv_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
+            <span class="n">pvol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+            <span class="n">m_gm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+            <span class="n">m_c_i4</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+            <span class="n">m_c_i6</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+            <span class="n">material_dictionary</span><span class="p">[</span><span class="n">element_number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                                                      <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">,</span> <span class="n">k4</span><span class="p">],</span> <span class="c1"># c1, k1, k2</span>
+                                                      <span class="p">[</span><span class="n">av_x</span><span class="p">,</span> <span class="n">av_y</span><span class="p">,</span> <span class="n">av_z</span><span class="p">],</span>   <span class="c1"># avector</span>
+                                                      <span class="p">[</span><span class="n">bv_x</span><span class="p">,</span> <span class="n">bv_y</span><span class="p">,</span> <span class="n">bv_z</span><span class="p">],</span>   <span class="c1"># bvector</span>
+                                                      <span class="n">pvol</span><span class="p">,</span>
+                                                      <span class="p">[</span><span class="n">m_gm</span><span class="p">,</span> <span class="n">m_c_i4</span><span class="p">,</span> <span class="n">m_c_i6</span><span class="p">]</span>
+            <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">material_dictionary</span></div>
+
+
+<div class="viewcode-block" id="read_strain_output"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_strain_output">[docs]</a><span class="k">def</span> <span class="nf">read_strain_output</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in all the strain values from the Strain output file</span>
+<span class="sd">    and provides an output of the Strain tensor.</span>
+
+<span class="sd">    :param filename:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">input_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="n">file_data</span>  <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">numerics_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\s+[0-9]&quot;</span>
+    <span class="n">element_number_line</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^\s+ELEMENT&quot;</span>
+    <span class="n">string_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[A-Z]*E+&quot;</span>
+
+    <span class="n">hencky_strain_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="c1"># Initialising variables to avoid errors</span>
+    <span class="n">node_counter</span>   <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_x</span>      <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_y</span>      <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_z</span>      <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_xy</span>     <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_yz</span>     <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_e_xz</span>     <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">element_number</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_data</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">element_number_line</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="n">element_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">element_line</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">element_line</span><span class="p">))</span>
+            <span class="n">element_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element_line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="c1"># Reset node variables</span>
+            <span class="n">node_counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">numerics_pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string_pattern</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+
+            <span class="c1"># Here given the number of nodes -&gt; calculate the average strain for each strain component and</span>
+            <span class="c1"># set that up as a matrix to be added to the strain dictionary per element</span>
+            <span class="c1"># This dictionary needs to be returned by this function so that the I_4 can be calculated for every</span>
+            <span class="c1"># element :) -&gt; cue for remodelling.</span>
+
+            <span class="n">node_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="n">line_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">line_content</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_content</span><span class="p">))</span>
+
+            <span class="c1"># Problem is you need to average for every element and then provide the strain result for it proper</span>
+
+            <span class="n">e_x</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">e_y</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">e_z</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+            <span class="n">e_xy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">e_yz</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">e_xz</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line_content</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">node_counter</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">total_e_x</span> <span class="o">=</span> <span class="n">e_x</span>
+                <span class="n">total_e_y</span> <span class="o">=</span> <span class="n">e_y</span>
+                <span class="n">total_e_z</span> <span class="o">=</span> <span class="n">e_z</span>
+
+                <span class="n">total_e_xy</span> <span class="o">=</span> <span class="n">e_xy</span>
+                <span class="n">total_e_yz</span> <span class="o">=</span> <span class="n">e_yz</span>
+                <span class="n">total_e_xz</span> <span class="o">=</span> <span class="n">e_xz</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">total_e_x</span> <span class="o">+=</span> <span class="n">e_x</span>
+                <span class="n">total_e_y</span> <span class="o">+=</span> <span class="n">e_y</span>
+                <span class="n">total_e_z</span> <span class="o">+=</span> <span class="n">e_z</span>
+
+                <span class="n">total_e_xy</span> <span class="o">+=</span> <span class="n">e_xy</span>
+                <span class="n">total_e_yz</span> <span class="o">+=</span> <span class="n">e_yz</span>
+                <span class="n">total_e_xz</span> <span class="o">+=</span> <span class="n">e_xz</span>
+
+            <span class="c1"># Commit</span>
+            <span class="c1"># Averaged Green Strain Tensor</span>
+            <span class="c1"># convert to engineering :)</span>
+            <span class="n">avg_e_x</span>     <span class="o">=</span> <span class="n">total_e_x</span> <span class="o">/</span> <span class="n">node_counter</span>
+            <span class="n">avg_e_y</span>     <span class="o">=</span> <span class="n">total_e_y</span> <span class="o">/</span> <span class="n">node_counter</span>
+            <span class="n">avg_e_z</span>     <span class="o">=</span> <span class="n">total_e_z</span> <span class="o">/</span> <span class="n">node_counter</span>
+
+            <span class="n">avg_e_xy</span>    <span class="o">=</span> <span class="n">total_e_xy</span> <span class="o">/</span> <span class="n">node_counter</span>
+            <span class="n">avg_e_xz</span>    <span class="o">=</span> <span class="n">total_e_xz</span> <span class="o">/</span> <span class="n">node_counter</span>
+            <span class="n">avg_e_yz</span>    <span class="o">=</span> <span class="n">total_e_yz</span> <span class="o">/</span> <span class="n">node_counter</span>
+
+            <span class="n">avg_e_yx</span>    <span class="o">=</span> <span class="n">avg_e_xy</span>
+            <span class="n">avg_e_zx</span>    <span class="o">=</span> <span class="n">avg_e_xz</span>
+            <span class="n">avg_e_zy</span>    <span class="o">=</span> <span class="n">avg_e_yz</span>
+
+            <span class="c1"># # arrange them in an e_whatever list for each strain component and sum them using math_ops or something.</span>
+            <span class="c1"># hencky_strain_dict[element_number] = [[avg_e_x, avg_e_xy, avg_e_xz],</span>
+            <span class="c1">#                                       [avg_e_yx, avg_e_y, avg_e_yz],</span>
+            <span class="c1">#                                       [avg_e_zx, avg_e_zy, avg_e_z]]</span>
+
+            <span class="n">hencky_strain_dict</span><span class="p">[</span><span class="n">element_number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">avg_e_x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                                                  <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">avg_e_y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                                                  <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">avg_e_z</span><span class="p">]]</span>
+
+    <span class="n">input_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Return the green strain tensor, for further use.</span>
+    <span class="k">return</span> <span class="n">hencky_strain_dict</span></div>
+
+
+<div class="viewcode-block" id="read_fibroblast_stretch_file"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_fibroblast_stretch_file">[docs]</a><span class="k">def</span> <span class="nf">read_fibroblast_stretch_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in a fibroblast file and provides a dictionary back as a data structure containing the information</span>
+
+<span class="sd">    {e_no: lambda_f, lambda_f^R, lambda_tissue}</span>
+
+<span class="sd">    :param filename:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f_file</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="n">fibro_stretch_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="n">words_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[A-Z]+&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f_file</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">words_regex</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">line</span>        <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">line</span>        <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">e_no</span>        <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">lambda_f_i4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">lambda_f_i6</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">lambda_f__ri4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">lambda_f_r_i6</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">lambda_t_i4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">lambda_t_i6</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+            <span class="n">fibro_stretch_dictionary</span><span class="p">[</span><span class="n">e_no</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">lambda_f_i4</span><span class="p">,</span> <span class="n">lambda_f_i6</span><span class="p">,</span> <span class="n">lambda_f__ri4</span><span class="p">,</span> <span class="n">lambda_f_r_i6</span><span class="p">,</span> <span class="n">lambda_t_i4</span><span class="p">,</span>
+                                              <span class="n">lambda_t_i6</span><span class="p">]</span>
+
+    <span class="n">f_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fibro_stretch_dictionary</span></div>
+
+
+<div class="viewcode-block" id="read_hgo_material_musc"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_musc">[docs]</a><span class="k">def</span> <span class="nf">read_hgo_material_musc</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in a csv file containing hgo material information about a mesh</span>
+<span class="sd">    and returns a dictionary to be further processed in a script.</span>
+
+<span class="sd">    Example usage:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        read_hgo_material(&quot;material_values.csv&quot;)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename(str): a csv file containing material information</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        material_dictionary(dict):  dictionary structure containing all material</span>
+<span class="sd">                                    information in one neat variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">material_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="c1"># Get the step number return it and update it !</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^step.*&#39;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+        <span class="c1"># Cleanly instruct the csv reader to skip the header line</span>
+        <span class="c1"># this has been done in order to maintain a header line</span>
+        <span class="c1"># so as to be able to understand the csv file when opened</span>
+        <span class="c1"># manually</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">element_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">k1t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">k2t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">k1m</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">k2m</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">av_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+            <span class="n">av_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+            <span class="n">av_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+            <span class="n">bv_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+            <span class="n">bv_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+            <span class="n">bv_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
+            <span class="n">pvol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+            <span class="n">fx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+
+            <span class="n">material_dictionary</span><span class="p">[</span><span class="n">element_number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                                                      <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">k1t</span><span class="p">,</span> <span class="n">k2t</span><span class="p">,</span> <span class="n">k1m</span><span class="p">,</span> <span class="n">k2m</span><span class="p">,</span> <span class="n">fx</span><span class="p">],</span> <span class="c1"># c1, k1, k2</span>
+                                                      <span class="p">[</span><span class="n">av_x</span><span class="p">,</span> <span class="n">av_y</span><span class="p">,</span> <span class="n">av_z</span><span class="p">],</span> <span class="c1"># avector</span>
+                                                      <span class="p">[</span><span class="n">bv_x</span><span class="p">,</span> <span class="n">bv_y</span><span class="p">,</span> <span class="n">bv_z</span><span class="p">],</span> <span class="c1"># bvector</span>
+                                                      <span class="n">pvol</span><span class="p">,</span> <span class="c1"># pvol,</span>
+                                                      <span class="n">fx</span>
+            <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">material_dictionary</span></div>
+
+
+<span class="c1"># Default hgo material reader without modifications for specific tissues !</span>
+<div class="viewcode-block" id="read_hgo_material_original"><a class="viewcode-back" href="../../../ansyspreprocessing.html#ansystotal.ansyspreprocessing.ansys_file_reader.read_hgo_material_original">[docs]</a><span class="k">def</span> <span class="nf">read_hgo_material_original</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     Reads in a csv file containing hgo material information about a mesh</span>
+<span class="sd">     and returns a dictionary to be further processed in a script.</span>
+
+<span class="sd">     Example usage:</span>
+
+<span class="sd">     .. code-block:: python</span>
+
+<span class="sd">         read_hgo_material(&quot;material_values.csv&quot;)</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">         filename(str): a csv file containing material information</span>
+
+<span class="sd">     Returns:</span>
+<span class="sd">         material_dictionary(dict):  dictionary structure containing all material</span>
+<span class="sd">                                     information in one neat variable.</span>
+<span class="sd">     &quot;&quot;&quot;</span>
+    <span class="n">material_dictionary</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Cleanly instruct the csv reader to skip the header line</span>
+        <span class="c1"># this has been done in order to maintain a header line</span>
+        <span class="c1"># so as to be able to understand the csv file when opened</span>
+        <span class="c1"># manually</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">element_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">k1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">k2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">k3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">k4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">av_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+            <span class="n">av_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+            <span class="n">av_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+            <span class="n">bv_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+            <span class="n">bv_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+            <span class="n">bv_z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">])</span>
+            <span class="n">pvol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+            <span class="n">material_dictionary</span><span class="p">[</span><span class="n">element_number</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="n">c1</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">,</span> <span class="n">k4</span><span class="p">],</span>  <span class="c1"># c1, k1, k2</span>
+                <span class="p">[</span><span class="n">av_x</span><span class="p">,</span> <span class="n">av_y</span><span class="p">,</span> <span class="n">av_z</span><span class="p">],</span>  <span class="c1"># avector</span>
+                <span class="p">[</span><span class="n">bv_x</span><span class="p">,</span> <span class="n">bv_y</span><span class="p">,</span> <span class="n">bv_z</span><span class="p">],</span>  <span class="c1"># bvector</span>
+                <span class="n">pvol</span><span class="p">,</span>
+            <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">material_dictionary</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shaktidhar Dandapani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

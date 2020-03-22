@@ -1,0 +1,6 @@
+time_period=20
+number_of_iterations=25
+alpha=1.5
+beta=3.0
+gamma=0.4
+iteration=0

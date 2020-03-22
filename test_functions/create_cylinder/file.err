@@ -1,0 +1,36 @@
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       17:50:16
+
+ *** ERROR ***                           CP =       5.109   TIME= 17:51:09
+ Volume 1 has invalid topology for mapped brick meshing.                 
+
+ *** ERROR ***                           CP =       6.031   TIME= 17:51:28
+ Volume 1 has invalid topology for mapped brick meshing.                 
+
+ *** ERROR ***                           CP =       8.656   TIME= 17:52:44
+ Volume 1 has invalid topology for mapped brick meshing.                 
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:13:16
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:51:46
+
+ *** WARNING ***                         CP =       8.047   TIME= 00:54:18
+ Structural elements without mid nodes usually produce much more         
+ accurate results in quad or brick shape.                                
+
+ *** WARNING ***                         CP =       8.156   TIME= 00:54:20
+ Volume 1 is being meshed entirely with SOLID185 tetrahedra, which can   
+ be much less accurate than bricks.  Use quadratic (10-node) tetrahedra  
+ if available.                                                           
+
+ *** WARNING ***                         CP =      40.000   TIME= 00:54:52
+ Shape testing revealed that 95 of the 2793671 new or modified elements  
+ violate shape warning limits.  To review test results, please see the   
+ output file or issue the CHECK command.                                 
+
+ *** WARNING ***                         CP =      51.953   TIME= 00:55:30
+ The EPLO command cannot be executed.  The selected elements cannot be   
+ displayed by PowerGraphics.  To correct this situation, select          
+ different elements or turn off PowerGraphics.                           
+
+ *** WARNING ***                         CP =      52.000   TIME= 00:55:32
+ The EPLO command cannot be executed.  The selected elements cannot be   
+ displayed by PowerGraphics.  To correct this situation, select          
+ different elements or turn off PowerGraphics.                           

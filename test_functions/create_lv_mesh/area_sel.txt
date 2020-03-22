@@ -1,0 +1,8 @@
+ASEL, s, , , 2
+ASEL, a, , , 6
+ASEL, a, , , 10
+ASEL, a, , , 14
+CM, INNER_SURFACE, AREA
+NSLA, S, 1
+NLIST
+ALLSEL

@@ -1,0 +1,20 @@
+! =============================================
+! Identify a node number and a finite range
+nodenum = 407
+range = 3e-02
+! =============================================
+
+alls
+nsel,s,node,,nodenum
+xloc = NX(nodenum)
+yloc = NY(nodenum)
+
+nsel,s,loc,x,xloc-range,xloc+range
+nsel,r,loc,y,yloc-range,yloc+range
+
+! select elements relevant to the nodes selected
+ESLN, S, 0
+EPLOT
+!/OUTPUT, elements_scar, txt
+!ELIST
+!/OUT

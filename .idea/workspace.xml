@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fcdaa5aa-16f8-4760-9945-04613ef6a365" name="Default" comment="Date: 30.06.2019&#10;&#10;Comments&#10;--------&#10;1. Results to be compiled !!! &#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done.">
+      <change afterPath="$PROJECT_DIR$/results/plot_average_values/plot_mech_quants" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/workflows/create_homeo_inital.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TASKLIST_OLD.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansysdata/lv_14k_nodes_mesh/create_materials_dat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansysdata/lv_20k_nodes_mesh/create_materials_dat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansysdata/lv_6k_nodes_mesh/create_materials_dat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansysexecutionfiles/ansys_file_HGO.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansysexecutionfiles/gr_data_setup_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansyspostprocessing/tensor_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansyspostprocessing/tensor_operations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansyspostprocessing/vtk_file_writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansyspostprocessing/vtk_file_writer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_component_writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_component_writer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_file_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_file_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_file_writer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/ansyspreprocessing/ansys_file_writer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/genericoperations/calculate_displacement_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/genericoperations/calculate_displacement_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/genericoperations/centroid_fibre_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/genericoperations/centroid_fibre_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ansystotal/genericoperations/mesh_information_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/ansystotal/genericoperations/mesh_information_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gr_hgo_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/gr_hgo_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gr_sb_complete.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gr_toe_walking.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parameters/directories_information.dat" beforeDir="false" afterPath="$PROJECT_DIR$/parameters/directories_information.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parameters/parameters.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parameters/parameters_myocardium.dat" beforeDir="false" afterPath="$PROJECT_DIR$/parameters/parameters_myocardium.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/plot_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/results/plot_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflows/remodelling_complete_hgo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflows/remodelling_mod_hgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/workflows/remodelling_mod_hgo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workflows/remodelling_tissue_strip_new.py" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$calculate_orthogonal_vectors.coverage" NAME="calculate_orthogonal_vectors Coverage Results" MODIFIED="1558365166192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_materials_dat__1_.coverage" NAME="create_materials_dat (1) Coverage Results" MODIFIED="1559769780913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/lv_6k_nodes_mesh" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$test.coverage" NAME="test Coverage Results" MODIFIED="1545058121785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/simple_cylinder_solid185" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$calculate_orthogonal_vectors__2_.coverage" NAME="calculate_orthogonal_vectors (2) Coverage Results" MODIFIED="1558182610397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr$plot_data_files.coverage" NAME="plot_data_files Coverage Results" MODIFIED="1542152189217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_results_general__1_.coverage" NAME="plot_results_general (1) Coverage Results" MODIFIED="1557253635172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/ansys_gr$gr_hgo_model.coverage" NAME="gr_hgo_model Coverage Results" MODIFIED="1541122114423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$generate_centroids.coverage" NAME="generate_centroids Coverage Results" MODIFIED="1544897311975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansysoperations" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$py_test_in_circumferential_fibres_vtk_py.coverage" NAME="py.test in circumferential_fibres.vtk.py Coverage Results" MODIFIED="1557771731539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$vtk_file_writer.coverage" NAME="vtk_file_writer Coverage Results" MODIFIED="1555350843366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vtkvisualistaion" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$find_points_cube_sides.coverage" NAME="find_points_cube_sides Coverage Results" MODIFIED="1558183983404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$rotation_matrix.coverage" NAME="rotation_matrix Coverage Results" MODIFIED="1558897557533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_material_file__2_.coverage" NAME="create_material_file (2) Coverage Results" MODIFIED="1555003041234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/strip_uniaxial_tissue_SOLID185" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_results.coverage" NAME="plot_results Coverage Results" MODIFIED="1559846887483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/ansys_gr$ansys_file_reader.coverage" NAME="ansys_file_reader Coverage Results" MODIFIED="1541121390709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansysscriptgenerator" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$calculate_orthogonal_vectors__1_.coverage" NAME="calculate_orthogonal_vectors (1) Coverage Results" MODIFIED="1558121048907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/Programming/Python/mathematical_operations" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$circumferential_fibres_vtk.coverage" NAME="circumferential_fibres.vtk Coverage Results" MODIFIED="1557774802534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_materials_dat__2_.coverage" NAME="create_materials_dat (2) Coverage Results" MODIFIED="1560827229788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/lv_5k_nodes_mesh" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$visualise_mesh_and_fibres.coverage" NAME="visualise_mesh_and_fibres Coverage Results" MODIFIED="1558381723186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../misc/proving_grounds/vtk_with_fibres/vtk_test" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_muscle_vtk_file.coverage" NAME="create_muscle_vtk_file Coverage Results" MODIFIED="1555432096590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vtkvisualistaion" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_material_file.coverage" NAME="create_material_file Coverage Results" MODIFIED="1557169011074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/strip_uniaxial_tissue_SOLID185" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_simple_stress_strain.coverage" NAME="plot_simple_stress_strain Coverage Results" MODIFIED="1546860126278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/strip_tissue_uniaxial" />
+    <SUITE FILE_PATH="coverage/ansys_gr$plot_graphs.coverage" NAME="plot_graphs Coverage Results" MODIFIED="1543325890194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$gr_hgo_model.coverage" NAME="gr_hgo_model Coverage Results" MODIFIED="1546114010428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$centroid_fibre_gen.coverage" NAME="centroid_fibre_gen Coverage Results" MODIFIED="1558185271492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansyspreprocessing" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$tst_reader.coverage" NAME="tst_reader Coverage Results" MODIFIED="1552304495486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$visualise_mesh_and_fibres__1_.coverage" NAME="visualise_mesh_and_fibres (1) Coverage Results" MODIFIED="1559658250089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_functions/vtk_test" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_more_results.coverage" NAME="plot_more_results Coverage Results" MODIFIED="1552576774524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$mesh_information_structures.coverage" NAME="mesh_information_structures Coverage Results" MODIFIED="1558184535984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansyspreprocessing" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$math_operations.coverage" NAME="math_operations Coverage Results" MODIFIED="1557730240299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansyspreprocessing" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$write_vtk_myocardium.coverage" NAME="write_vtk_myocardium Coverage Results" MODIFIED="1555605254013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vtkvisualistaion" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_materials_dat.coverage" NAME="create_materials_dat Coverage Results" MODIFIED="1559768140881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/lv_14k_nodes_mesh" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_material_file__1_.coverage" NAME="create_material_file (1) Coverage Results" MODIFIED="1554815364191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/strip_uniaxial_tissue_SOLID186" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$create_vtk_files_for_resp_data.coverage" NAME="create_vtk_files_for_resp_data Coverage Results" MODIFIED="1545063128711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansysdata/simple_cylinder_solid185" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_results_general.coverage" NAME="plot_results_general Coverage Results" MODIFIED="1557168563592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results/muscle" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$calculate_displacement_function_plot_test.coverage" NAME="calculate_displacement_function_plot_test Coverage Results" MODIFIED="1556147040559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansyspreprocessing" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ansys_gr_updated" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ansys_file_reader</find>
+      <find>infarct_elements</find>
+      <find>check_file</find>
+      <find>afr</find>
+      <find>c_curr_step</find>
+      <find>c_curr_iteration</find>
+      <find>time_info</find>
+      <find>time</find>
+      <find>sigma_aniso_gradient_m</find>
+      <find>_prev\b</find>
+      <find>ansysapdlscripts</find>
+      <find>/libraries/ansysapdlscripts</find>
+      <find>normal</find>
+      <find>anormal</find>
+      <find>bnormal</find>
+      <find>centroid_[a-z]+ +</find>
+      <find>cfg.</find>
+      <find>/2</find>
+      <find>previous</find>
+      <find>fabs</find>
+      <find>c_gamma_t_curr</find>
+      <find>cube</find>
+      <find>[k]</find>
+      <find>print</find>
+      <find>&lt;</find>
+      <find>read</find>
+      <find>math.fabs</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>c_curr_iteration</replace>
+      <replace>.\libraries\ansysapdlscripts</replace>
+      <replace>./libraries/ansysapdlscripts</replace>
+      <replace>anormal</replace>
+      <replace>a_perp_2d</replace>
+      <replace>b_perp_2d</replace>
+      <replace>centroid_[a-z]+ -</replace>
+      <replace>curr</replace>
+      <replace>[e_no]</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1SEKeQYcmqrkdENFbAtqrK44lTP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/results/plot_average_values/evo" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\ansystotal\genericoperations" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\genericoperations" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\ansystotal\ansyspostprocessing" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\results\plot_average_values\evo" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\results\plot_average_values" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\ansysdata\almost_ideal_lv\2mm" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\ansysdata\almost_ideal_lv\5mm" />
+      <recent name="D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\ansysdata\almost_ideal_lv\10mm" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.plot_mat_props">
+    <configuration name="create_materials_dat (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ansys_gr_updated" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ansysdata/almost_ideal_lv/2.5mm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ansysdata/almost_ideal_lv/2.5mm/create_materials_dat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_materials_dat (4)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ansys_gr_updated" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ansysdata/almost_ideal_lv/5mm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ansysdata/almost_ideal_lv/5mm/create_materials_dat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="plot_mat_props" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ansys_gr_updated" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/results/plot_average_values" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/results/plot_average_values/plot_mat_props" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tensor_operations" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ansys_gr_updated" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ansystotal/ansyspostprocessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ansystotal/ansyspostprocessing/tensor_operations.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="visualise_mesh_and_fibres" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ansys_gr_updated" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test_functions/vtk_test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_functions/vtk_test/visualise_mesh_and_fibres.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.create_materials_dat (2)" />
+      <item itemvalue="Python.create_materials_dat (4)" />
+      <item itemvalue="Python.visualise_mesh_and_fibres" />
+      <item itemvalue="Python.tensor_operations" />
+      <item itemvalue="Python.plot_mat_props" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.plot_mat_props" />
+        <item itemvalue="Python.tensor_operations" />
+        <item itemvalue="Python.create_materials_dat (2)" />
+        <item itemvalue="Python.create_materials_dat (4)" />
+        <item itemvalue="Python.visualise_mesh_and_fibres" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fcdaa5aa-16f8-4760-9945-04613ef6a365" name="Default" comment="" />
+      <created>1541120118090</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541120118090</updated>
+      <workItem from="1571123446352" duration="3580000" />
+      <workItem from="1571311191811" duration="7074000" />
+      <workItem from="1573166890457" duration="1218000" />
+      <workItem from="1573256814622" duration="565000" />
+      <workItem from="1573305431039" duration="2672000" />
+      <workItem from="1573331875834" duration="3426000" />
+      <workItem from="1573405741601" duration="3974000" />
+    </task>
+    <task id="LOCAL-00001" summary="Testing latest update !">
+      <created>1552304143816</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552304143816</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Date: 08.05.2019&#10;&#10;Comments&#10;--------&#10;Uploading latest changes.&#10;Task List: &#10;1. Refactor code&#10;2. Clean up storage of results file&#10;3. directory manager for STGRF">
+      <created>1557306362265</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557306362265</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Date: 13.05.2019&#10;&#10;Comments&#10;--------&#10;Added Point class for storing nodes.&#10;Updating with classes for elements etc,&#10;making it easier to use functions on &#10;each object without having to resort&#10;to manually using the co ordinates or &#10;node numbers.&#10;&#10;Documentation incoming :)">
+      <created>1557776367342</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557776367342</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Date: 21.05.2019&#10;&#10;Comments&#10;--------&#10;Attaining better results based on cleaner definitions for fibre directions.">
+      <created>1558471738565</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1558471738565</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Date: 31.05.2019&#10;&#10;Comments&#10;--------&#10;1. Complete Project restructuring&#10;2. Clarity in implementation&#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done.">
+      <created>1559324166523</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559324166523</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Date: 30.06.2019&#10;&#10;Comments&#10;--------&#10;1. Results to be compiled !!! &#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done.">
+      <created>1561921439116</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1561921439116</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="py_test_in_circumferential_fibres_vtk_py - 2019.05.13 at 19h 22m 15s.xml">
+      <configuration name="py.test in circumferential_fibres.vtk.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_prin_strain_output_py - 2019.06.26 at 19h 08m 52s.xml">
+      <configuration name="pytest in test_prin_strain_output.py" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Testing latest update !" />
+    <MESSAGE value="Date: 08.05.2019&#10;&#10;Comments&#10;--------&#10;Uploading latest changes.&#10;Task List: &#10;1. Refactor code&#10;2. Clean up storage of results file&#10;3. directory manager for STGRF" />
+    <MESSAGE value="Date: 13.05.2019&#10;&#10;Comments&#10;--------&#10;Added Point class for storing nodes.&#10;Updating with classes for elements etc,&#10;making it easier to use functions on &#10;each object without having to resort&#10;to manually using the co ordinates or &#10;node numbers.&#10;&#10;Documentation incoming :)" />
+    <MESSAGE value="Date: 21.05.2019&#10;&#10;Comments&#10;--------&#10;Attaining better results based on cleaner definitions for fibre directions." />
+    <MESSAGE value="Date: 31.05.2019&#10;&#10;Comments&#10;--------&#10;1. Complete Project restructuring&#10;2. Clarity in implementation&#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done." />
+    <MESSAGE value="Date: 30.06.2019&#10;&#10;Comments&#10;--------&#10;1. Results to be compiled !!! &#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Date: 30.06.2019&#10;&#10;Comments&#10;--------&#10;1. Results to be compiled !!! &#10;3. Set up for final .exe program development cycle.&#10;4. Begin commenting and documenting code.&#10;5. Create Sphinx documentation.&#10;6. Unit and integration testing to be done." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$tensor_operations.coverage" NAME="tensor_operations Coverage Results" MODIFIED="1573167505057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ansystotal/ansyspostprocessing" />
+    <SUITE FILE_PATH="coverage/ansys_gr_updated$plot_mat_props.coverage" NAME="plot_mat_props Coverage Results" MODIFIED="1573410862568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results/plot_average_values" />
+  </component>
+</project>

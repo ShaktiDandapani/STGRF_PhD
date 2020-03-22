@@ -1,0 +1,5 @@
+/POST1
+/OUTPUT,strain_list,txt
+/FORMAT,10,,18,5
+PRESOL,EPEL,PRIN
+/OUT

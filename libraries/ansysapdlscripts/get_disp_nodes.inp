@@ -1,0 +1,42 @@
+!/OUTPUT,disp_nodes,txt
+!PRNSOL,U,COMP   
+!/OUT
+
+
+*GET,n_max,NODE, ,NUM,MAX
+! array is a n_max * 4 matrix with
+! columns to store:
+! ================================
+! node | new_x | new_y | new_z
+! co-ordinates for the next step.
+*DIM,new_nodes,ARRAY,n_max,4
+
+*DO,i,1,n_max,1
+  ! Get the original node locations
+  ! for each node
+  *GET,loc_x,NODE,i,LOC,X
+  *GET,loc_y,NODE,i,LOC,Y
+  *GET,loc_z,NODE,i,LOC,Z
+  ! Get the displacements for
+  ! each node
+  *GET,disp_x,NODE,i,U,X
+  *GET,disp_y,NODE,i,U,Y
+  *GET,disp_z,NODE,i,U,Z
+
+  ! Calculate the new new_nodes
+  ! by adding the displacements
+  ! to the old node.
+  new_nodes(i,1) = i
+  new_nodes(i,2) = loc_x + disp_x
+  new_nodes(i,3) = loc_y + disp_y
+  new_nodes(i,4) = loc_z + disp_z
+
+*ENDDO
+
+*CFOPEN, disp_nodes,txt
+*VWRITE,'     No.', ' X', 'Y', 'Z'
+(A10,' ', A13,' ', A13,' ', A13)
+*VWRITE,new_nodes(1,1),new_nodes(1,2),new_nodes(1,3),new_nodes(1,4)
+(F8.0,'  ',F10.5,'  ',F10.5,'  ',F10.5)
+*CFCLOSE
+

@@ -1,0 +1,2046 @@
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       16:15:19
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+! /CLEAR,NOSTART
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:46:29  
+!*  
+/REPLOT,RESIZE  
+! K,1,18.278,0,0
+! K,2,26.778,0,0
+! K,0,0,-42.750 
+! K,0,0,-49.250 
+! \begin
+! begin 
+! \prep7
+/prep7  
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,0,0,-42.750   
+K,0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,-7.1,0 
+FITEM,3,17.8,-16.05,0   
+FITEM,3,14.9,-27.95,0   
+FITEM,3,7.9,-37.9,0 
+FITEM,3,26.3,-7.35,0
+FITEM,3,25.1,-18.15,0   
+FITEM,3,20.75,-32.8,0   
+FITEM,3,10.05,-44.7,0   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+!*  
+FLST,3,16,8 
+FITEM,3,18.4,-3.6,0 
+FITEM,3,26.6,-3.5,0 
+FITEM,3,18.2,-11.1,0
+FITEM,3,25.9,-11.55,0   
+FITEM,3,17.4,-18.75,0   
+FITEM,3,23.1,-27.4,0
+FITEM,3,16.35,-23.3,0   
+FITEM,3,24.6,-21.45,0   
+FITEM,3,14.25,-29.1,0   
+FITEM,3,19.6,-34.65,0   
+FITEM,3,10.35,-35.25,0  
+FITEM,3,14.65,-41,0 
+FITEM,3,5.9,-39.45,0
+FITEM,3,8.45,-45.85,0   
+FITEM,3,2.4,-41.7,0 
+FITEM,3,3.75,-48.05,0   
+K, ,P51X
+FLST,3,2,8  
+FITEM,3,12.85,-31.75,0  
+FITEM,3,17.95,-37.25,0  
+K, ,P51X
+SAVE,'test_a_new_one','','D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\test_functions\create_lv_mesh\'  
+SAVE
+FLST,2,2,4,ORDE,2   
+FITEM,2,3   
+FITEM,2,-4  
+LDELE,P51X  
+FLST,2,2,4,ORDE,2   
+FITEM,2,1   
+FITEM,2,-2  
+LDELE,P51X  
+LSTR,       1,       2  
+LSTR,      14,      13  
+LSTR,       1,      13  
+LSTR,       2,      14  
+LSTR,      13,       5  
+LSTR,       5,      15  
+LSTR,       5,       9  
+LSTR,      14,       9  
+LSTR,       9,      16  
+LSTR,      16,      10  
+LSTR,      10,      20  
+LSTR,      20,      18  
+LSTR,      18,      11  
+LSTR,      11,      22  
+LSTR,      22,      30  
+LSTR,      30,      24  
+LSTR,      24,      12  
+LSTR,      12,      26  
+LSTR,      26,      28  
+LSTR,      28,       4  
+LSTR,       4,       3  
+LSTR,       3,      27  
+LSTR,      27,      25  
+LSTR,       8,      23  
+LSTR,       8,      25  
+LSTR,      23,      29  
+LSTR,      29,      21  
+LSTR,      21,       7  
+LSTR,       7,      19  
+LSTR,      19,      17  
+LSTR,      17,       6  
+LSTR,       6,      15  
+LSTR,      15,      16  
+LSTR,       6,      10  
+LSTR,      17,      20  
+LSTR,      19,      18  
+LSTR,      21,      11  
+LSTR,      29,      22  
+LSTR,      23,      24  
+LSTR,       8,      12  
+LSTR,      25,      26  
+LSTR,      27,      28  
+FLST,2,2,4,ORDE,2   
+FITEM,2,38  
+FITEM,2,40  
+LDELE,P51X  
+LSTR,      29,      30  
+SAVE
+FLST,2,4,4  
+FITEM,2,1   
+FITEM,2,3   
+FITEM,2,2   
+FITEM,2,4   
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,5   
+FITEM,2,2   
+FITEM,2,8   
+FITEM,2,7   
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,6   
+FITEM,2,33  
+FITEM,2,7   
+FITEM,2,9   
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,32  
+FITEM,2,33  
+FITEM,2,10  
+FITEM,2,34  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,31  
+FITEM,2,34  
+FITEM,2,35  
+FITEM,2,11  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,29  
+FITEM,2,36  
+FITEM,2,13  
+FITEM,2,37  
+AL,P51X 
+kdele, 7
+FLST,2,2,4,ORDE,2   
+FITEM,2,28  
+FITEM,2,-29 
+LDELE,P51X  
+KDELE,       7  
+LSTR,      19,      21  
+FLST,2,4,4  
+FITEM,2,30  
+FITEM,2,35  
+FITEM,2,36  
+FITEM,2,12  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,28  
+FITEM,2,37  
+FITEM,2,36  
+FITEM,2,13  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,27  
+FITEM,2,38  
+FITEM,2,15  
+FITEM,2,37  
+AL,P51X 
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       16:20:56
+!*  
+FINISH  
+! /EXIT,NOSAV   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       13:31:11
+/input,menust,tmp,''
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       13:31:11
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       13:31:24
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       13:31:25
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:46:29  
+!*  
+/REPLOT,RESIZE  
+! K,1,18.278,0,0
+! K,2,26.778,0,0
+! K,0,0,-42.750 
+! K,0,0,-49.250 
+! \begin
+! begin 
+! \prep7
+/prep7  
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,0,0,-42.750   
+K,0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,-7.1,0 
+FITEM,3,17.8,-16.05,0   
+FITEM,3,14.9,-27.95,0   
+FITEM,3,7.9,-37.9,0 
+FITEM,3,26.3,-7.35,0
+FITEM,3,25.1,-18.15,0   
+FITEM,3,20.75,-32.8,0   
+FITEM,3,10.05,-44.7,0   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+/REPLOT,RESIZE  
+!*  
+ET,1,SOLID185   
+!*  
+lplot   
+kplot   
+FLST,3,14,8 
+FITEM,3,18.5,-3.7,0 
+FITEM,3,18.15,-12,0 
+FITEM,3,17.3,-20.35,0   
+FITEM,3,16.15,-25.05,0  
+FITEM,3,13.25,-31.3,0   
+FITEM,3,10.5,-35.3,0
+FITEM,3,4.4,-40.6,0 
+FITEM,3,5.15,-46.75,0   
+FITEM,3,14.75,-40.65,0  
+FITEM,3,19.1,-36.2,0
+FITEM,3,22.95,-28.1,0   
+FITEM,3,24.7,-21.9,0
+FITEM,3,26.2,-12.95,0   
+FITEM,3,26.55,-3.7,0
+K, ,P51X
+lplot   
+FLST,2,4,4,ORDE,2   
+FITEM,2,1   
+FITEM,2,-4  
+LDELE,P51X  
+kplot   
+KDELE,      25  
+kplot   
+FLST,3,1,8  
+FITEM,3,25.8,-12.55,0   
+K, ,P51X
+kplot   
+SAVE
+LSTR,       1,      13  
+LSTR,      26,       2  
+LSTR,       1,       2  
+LSTR,      13,      26  
+LSTR,      13,       5  
+LSTR,       5,      14  
+LSTR,      14,       6  
+LSTR,       6,      15  
+LSTR,      15,      16  
+LSTR,      16,       7  
+LSTR,       7,      17  
+LSTR,      17,      18  
+LSTR,      18,       8  
+LSTR,       8,      19  
+LSTR,      19,       3  
+LSTR,       3,       4  
+LSTR,       4,      20  
+LSTR,      20,      12  
+LSTR,      12,      21  
+LSTR,      21,      22  
+LSTR,      22,      11  
+LSTR,      11,      23  
+LSTR,      23,      24  
+LSTR,      24,      10  
+LSTR,      10,      25  
+LSTR,      25,       9  
+LSTR,      26,       9  
+LSTR,       5,       9  
+LSTR,      14,      25  
+LSTR,       6,      10  
+LSTR,      15,      24  
+LSTR,      16,      23  
+LSTR,       7,      11  
+LSTR,      17,      22  
+LSTR,      18,      21  
+LSTR,       8,      12  
+LSTR,      19,      20  
+kplot   
+FLST,2,4,4  
+FITEM,2,1   
+FITEM,2,4   
+FITEM,2,2   
+FITEM,2,3   
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,5   
+FITEM,2,28  
+FITEM,2,4   
+FITEM,2,27  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,6   
+FITEM,2,26  
+FITEM,2,28  
+FITEM,2,29  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,7   
+FITEM,2,30  
+FITEM,2,25  
+FITEM,2,29  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,8   
+FITEM,2,24  
+FITEM,2,31  
+FITEM,2,30  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,9   
+FITEM,2,32  
+FITEM,2,23  
+FITEM,2,31  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,10  
+FITEM,2,22  
+FITEM,2,32  
+FITEM,2,33  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,11  
+FITEM,2,21  
+FITEM,2,34  
+FITEM,2,33  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,12  
+FITEM,2,20  
+FITEM,2,35  
+FITEM,2,34  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,13  
+FITEM,2,36  
+FITEM,2,19  
+FITEM,2,35  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,14  
+FITEM,2,18  
+FITEM,2,37  
+FITEM,2,36  
+AL,P51X 
+FLST,2,3,4  
+FITEM,2,16  
+FITEM,2,15  
+FITEM,2,17  
+AL,P51X 
+FLST,2,4,4  
+FITEM,2,16  
+FITEM,2,37  
+FITEM,2,17  
+FITEM,2,15  
+AL,P51X 
+FLST,2,12,5,ORDE,2  
+FITEM,2,1   
+FITEM,2,-12 
+FLST,8,2,3  
+FITEM,8,3   
+FITEM,8,4   
+VROTAT,P51X, , , , , ,P51X, ,360,4, 
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/USER,  1   
+/VIEW,  1,  0.155406614335    ,  0.878069002394    ,  0.452596521480
+/ANG,   1,  0.235904093625  
+/REPLO  
+/VIEW,  1,  0.112651962529    ,  0.938554479746    ,  0.326228484175
+/ANG,   1,  0.327088538930  
+/REPLO  
+/VIEW,  1,  0.788979149988    , -0.495847216952    , -0.362832521042
+/ANG,   1,   36.5280999521  
+/REPLO  
+/VIEW,  1,  0.365459660408    , -0.228426445686    , -0.902363893075
+/ANG,   1,   20.6160902605  
+/REPLO  
+/VIEW,  1,  0.103290015268    , -0.120647390377    , -0.987307135567
+/ANG,   1,   17.8970239899  
+/REPLO  
+/VIEW,  1, -0.309102451865    ,  0.175134295805    , -0.934763955597
+/ANG,   1,   19.5511246503  
+/REPLO  
+/VIEW,  1, -0.320639108069    ,  0.680017110523    , -0.659368858661
+/ANG,   1,   22.6677032401  
+/REPLO  
+/VIEW,  1, -0.209054506548    ,  0.891375146698    , -0.402177275764
+/ANG,   1,   24.2488689500  
+/REPLO  
+/VIEW,  1, -0.125718649965    ,  0.924208862469    , -0.360600609518
+/ANG,   1,   16.7846435144  
+/REPLO  
+/VIEW,  1, -0.283698607480    ,  0.705274243245    , -0.649694806759
+/ANG,   1,   20.7676468101  
+/REPLO  
+/VIEW,  1,  0.316945595110    ,  0.684575256992    , -0.656431418546
+/ANG,   1,  -13.9631954814  
+/REPLO  
+/VIEW,  1,  0.436904523487    ,  0.663131827483    , -0.607758682979
+/ANG,   1,  -20.6317752069  
+/REPLO  
+/VIEW,  1,  0.433905969721    ,  0.739700265521    , -0.514362835583
+/ANG,   1,  -23.7314196124  
+/REPLO  
+/FOC,   1,  -1.72819884552    ,  -23.2851904882    ,  0.468894016120
+/REPLO  
+/VIEW,  1,  0.267151357830    ,  0.851924473839    , -0.450394097301
+/ANG,   1,  -16.1398702560  
+/REPLO  
+/VIEW,  1,  0.451682999746    ,  0.397700679702    , -0.798634232365
+/ANG,   1,  -15.5923125241  
+/REPLO  
+/VIEW,  1,  0.775788671555E-01,  0.962669178826    , -0.259325223436
+/ANG,   1,  -9.47935125952  
+/REPLO  
+/VIEW,  1, -0.743519991011E-01,  0.996168543094    ,  0.460436095457E-01
+/ANG,   1,   128.183987139  
+/REPLO  
+/VIEW,  1, -0.201595749281E-01,  0.938636603691    ,  0.344318047377
+/ANG,   1,  -178.212600948  
+/REPLO  
+/VIEW,  1, -0.285115076341E-01,  0.844175322018    , -0.535308434108
+/ANG,   1,   9.12688771184  
+/REPLO  
+/VIEW,  1,  0.207566395334E-01,  0.922357765208    , -0.385778841924
+/ANG,   1,   3.67922976981  
+/REPLO  
+/VIEW,  1,  0.306424899662E-01,  0.977485085660    , -0.208767682177
+/ANG,   1,  -1.30546767029  
+/REPLO  
+/VIEW,  1,  0.206106382347    ,  0.785488573176    , -0.583547650638
+/ANG,   1,  -12.2636478905  
+/REPLO  
+SAVE
+FLST,5,241,4,ORDE,2 
+FITEM,5,1   
+FITEM,5,-241
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,8, , , , ,1  
+!*  
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+FLST,5,48,6,ORDE,2  
+FITEM,5,1   
+FITEM,5,-48 
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,  1, -0.262472444069E-01,  0.344924707165    , -0.938263304488
+/ANG,   1,   1.14268990305  
+/REPLO  
+/VIEW,  1, -0.261851781783E-02,  0.137425747317    , -0.990508610431
+/ANG,   1,  0.806059921851  
+/REPLO  
+/VIEW,  1,  0.814105518638E-01,  0.112172065078    , -0.990348297248
+/ANG,   1,  0.195511551719  
+/REPLO  
+/VIEW,  1,  0.205738951920    ,  0.106508112353    , -0.972793660375
+/ANG,   1, -0.616286957288  
+/REPLO  
+/VIEW,  1,  0.371036429569    ,  0.303078381663E-01, -0.928123592459
+/ANG,   1,  -1.30838999521  
+/REPLO  
+/VIEW,  1,  0.631223646810    , -0.856215405209E-02, -0.775553606933
+/ANG,   1,  -1.38913070657  
+/REPLO  
+/VIEW,  1,  0.582480956387    ,  0.747974719754    , -0.318197665068
+/ANG,   1,  -10.3824439917  
+/REPLO  
+/VIEW,  1,  0.505348502242    ,  0.861249924138    ,  0.535860005452E-01
+/ANG,   1,  -38.2122740325  
+/REPLO  
+/VIEW,  1,  0.342722361372    ,  0.933532704700    ,  0.105157369076
+/ANG,   1,  -48.0659230361  
+/REPLO  
+FLST,2,48,6,ORDE,2  
+FITEM,2,1   
+FITEM,2,-48 
+VCLEAR,P51X 
+FLST,5,241,4,ORDE,2 
+FITEM,5,1   
+FITEM,5,-241
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,4, , , , ,1  
+!*  
+FLST,5,48,6,ORDE,2  
+FITEM,5,1   
+FITEM,5,-48 
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,  1,  0.590658831402    ,  0.477997893119    , -0.650107805722
+/ANG,   1,   6.85628831737  
+/REPLO  
+/VIEW,  1,  0.796757550696    ,  0.248178552997    , -0.550985309460
+/ANG,   1,   1.82104739022  
+/REPLO  
+/VIEW,  1,  0.896255424192    ,  0.198946562625    , -0.396417052895
+/ANG,   1, -0.590326516092  
+/REPLO  
+/VIEW,  1,  0.975394823661    ,  0.213396114581    , -0.553808293255E-01
+/ANG,   1,  -4.89700314794  
+/REPLO  
+/VIEW,  1,  0.786635364086    ,  0.606735357463    ,  0.114354754924
+/ANG,   1,  -10.0591058422  
+/REPLO  
+/VIEW,  1,  0.566049541699    ,  0.777189310511    ,  0.274890327166
+/ANG,   1,  -22.1681746054  
+/REPLO  
+/VIEW,  1,  0.418563608558E-01,  0.983800623431    ,  0.174311153956
+/ANG,   1,  -69.3933904059  
+/REPLO  
+/VIEW,  1,  0.987000083993    ,  0.549861616618E-01,  0.151021045630
+/ANG,   1,  -5.07299520432  
+/REPLO  
+/VIEW,  1,  0.803657385524    , -0.582930938912    ,  0.119692636164
+/ANG,   1,  -4.53203880256  
+/REPLO  
+/VIEW,  1,  0.702385878164    , -0.711439246252    ,  0.225450005143E-01
+/ANG,   1,  -8.71794425147  
+/REPLO  
+/VIEW,  1,  0.985579644956    ,  0.155283017834    , -0.672305571891E-01
+/ANG,   1,  -8.72386690810  
+/REPLO  
+/VIEW,  1,  0.838446789622    ,  0.532576618628    , -0.115624937891
+/ANG,   1,  -7.14669662446  
+/REPLO  
+/VIEW,  1,  0.408510344126    ,  0.892619509933    , -0.190655997096
+/ANG,   1,   6.09673934577  
+/REPLO  
+/VIEW,  1,  0.174800179217    ,  0.978222733593    , -0.111915954303
+/ANG,   1,   13.3371173016  
+/REPLO  
+/VIEW,  1,  0.667760601038    ,  0.704002591412    , -0.241818384302
+/ANG,   1,   1.60440862209  
+/REPLO  
+nlist   
+elist   
+nsel,s,loc,y,0  
+nplot   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+allsel  
+eplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+! cplane,0  
+/cplane,0   
+/type,1,5   
+/replot 
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+allsel  
+eplot   
+eplot   
+/type,1,2   
+/replot 
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+ASEL, s, , , 13 
+ASEL, a, , , 18 
+ASEL, a, , , 22 
+ASEL, a, , , 26 
+ASEL, a, , , 30 
+ASEL, a, , , 34 
+ASEL, a, , , 38 
+ASEL, a, , , 42 
+ASEL, a, , , 46 
+ASEL, a, , , 50 
+ASEL, a, , , 54 
+ASEL, a, , , 59 
+ASEL, a, , , 61 
+ASEL, a, , , 66 
+ASEL, a, , , 70 
+ASEL, a, , , 74 
+ASEL, a, , , 78 
+ASEL, a, , , 82 
+ASEL, a, , , 86 
+ASEL, a, , , 90 
+ASEL, a, , , 94 
+ASEL, a, , , 98 
+ASEL, a, , , 102
+ASEL, a, , , 107
+ASEL, a, , , 109
+ASEL, a, , , 114
+ASEL, a, , , 118
+ASEL, a, , , 122
+ASEL, a, , , 126
+ASEL, a, , , 130
+ASEL, a, , , 134
+ASEL, a, , , 138
+ASEL, a, , , 142
+ASEL, a, , , 146
+ASEL, a, , , 150
+ASEL, a, , , 155
+ASEL, a, , , 157
+ASEL, a, , , 161
+ASEL, a, , , 164
+ASEL, a, , , 167
+ASEL, a, , , 170
+ASEL, a, , , 173
+ASEL, a, , , 176
+ASEL, a, , , 179
+ASEL, a, , , 182
+ASEL, a, , , 185
+ASEL, a, , , 188
+ASEL, a, , , 192
+CM, INNER_SURFACE, AREA 
+NSLA, S, 1  
+nplot   
+/REPLOT,RESIZE  
+nlist   
+SAVE
+FINISH  
+! /EXIT,MODEL   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:25:31
+/input,menust,tmp,''
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:25:31
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+/POST1  
+WPSTYLE,,,,,,,,0
+allsel  
+eplot   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+FINISH  
+/SOL
+FINISH  
+/PREP7  
+FLST,2,48,6,ORDE,2  
+FITEM,2,1   
+FITEM,2,-48 
+VCLEAR,P51X 
+/UI,MESH,OFF
+lplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+FLST,5,241,4,ORDE,2 
+FITEM,5,1   
+FITEM,5,-241
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,12, , , , ,1 
+!*  
+FLST,5,48,6,ORDE,2  
+FITEM,5,1   
+FITEM,5,-48 
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+nlist   
+elist   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/VIEW,  1,  0.268633376664    ,  0.958782216964    ,  0.925892508671E-01
+/ANG,   1,   70.8513270069  
+/REPLO  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,2,48,6,ORDE,2  
+FITEM,2,1   
+FITEM,2,-48 
+VCLEAR,P51X 
+FLST,5,241,4,ORDE,2 
+FITEM,5,1   
+FITEM,5,-241
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,2, ,0, , , , ,1  
+!*  
+FLST,5,48,6,ORDE,2  
+FITEM,5,1   
+FITEM,5,-48 
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,  1,  0.439849872773    ,  0.778940757946    ,  0.446971346992
+/ANG,   1, -0.276200998272  
+/REPLO  
+/VIEW,  1,  0.213514340025    ,  0.953522824995    ,  0.212616671072
+/ANG,   1,  0.831055961963E-01  
+/REPLO  
+/VIEW,  1,  0.830191651109E-01,  0.995805041172    ,  0.384725642523E-01
+/ANG,   1,   19.7568216031  
+/REPLO  
+/VIEW,  1,  0.283381973051    ,  0.922851561930    ,  0.260844114354
+/ANG,   1,   2.39843527273  
+/REPLO  
+/VIEW,  1,  0.470391951596    ,  0.758768566533    ,  0.450557071096
+/ANG,   1,   1.41794910588  
+/REPLO  
+/VIEW,  1,  0.655941428209    ,  0.427993826742    ,  0.621741205832
+/ANG,   1,   1.70893207336  
+/REPLO  
+/VIEW,  1,  0.719678230599    , -0.180286736099    ,  0.670492309567
+/ANG,   1,   1.49714247717  
+/REPLO  
+/VIEW,  1,  0.695589056661    , -0.194811764133    ,  0.691523131073
+/ANG,   1,   1.84102027898  
+/REPLO  
+/VIEW,  1,  0.315097087733    , -0.104198281103    ,  0.943322078358
+/ANG,   1,   6.31100264096  
+/REPLO  
+/VIEW,  1, -0.476100364367    ,  0.534844944740E-01,  0.877762981619
+/ANG,   1,   8.71915589731  
+/REPLO  
+/VIEW,  1, -0.871526710817    ,  0.220845958028    ,  0.437799332064
+/ANG,   1,   4.38631705563  
+/REPLO  
+/VIEW,  1, -0.239499180626    ,  0.927095664609    , -0.288329275557
+/ANG,   1,  -52.1388106737  
+/REPLO  
+/VIEW,  1, -0.120441988176    ,  0.989237245218    ,  0.830867026566E-01
+/ANG,   1,   31.6990699033  
+/REPLO  
+/VIEW,  1, -0.176489733324    ,  0.915901169133    ,  0.360522429832
+/ANG,   1,   60.0879781747  
+/REPLO  
+/VIEW,  1, -0.200570585964    ,  0.978411434835    , -0.498247351206E-01
+/ANG,   1,  -15.0195725649  
+/REPLO  
+/VIEW,  1, -0.968498364507E-01,  0.994634589522    , -0.363612775718E-01
+/ANG,   1,  -21.5741255669  
+/REPLO  
+CMLIST,INNER_SURFACE,0  
+cmsel,s,inner_surface_node  
+cmsel,s,inner_surface,node  
+nplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+cmplot  
+nsel,s,node,inner_surface   
+nsel,s,all,inner_surface
+nsel,s,,inner_surface   
+nsel,s,1,inner_surface  
+FINISH  
+! /EXIT,NOSAV   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:38:31
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CSYS, 2 
+/replot 
+/REPLOT,RESIZE  
+/REPLOT,RESIZE  
+/REPLOT,RESIZE  
+! /CLEAR,NOSTART
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:46:29  
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,0,0,-42.750   
+K,0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,-7.1,0 
+FITEM,3,17.8,-16.05,0   
+FITEM,3,14.9,-27.95,0   
+FITEM,3,7.9,-37.9,0 
+FITEM,3,26.3,-7.35,0
+FITEM,3,25.1,-18.15,0   
+FITEM,3,20.75,-32.8,0   
+FITEM,3,10.05,-44.7,0   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:40:01
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:40:06
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:46:29  
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,0,0,-42.750   
+K,0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,-7.1,0 
+FITEM,3,17.8,-16.05,0   
+FITEM,3,14.9,-27.95,0   
+FITEM,3,7.9,-37.9,0 
+FITEM,3,26.3,-7.35,0
+FITEM,3,25.1,-18.15,0   
+kplot   
+allsel  
+kplot   
+FITEM,3,20.75,-32.8,0   
+FITEM,3,10.05,-44.7,0   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:40:59
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:41:38
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:41:42
+/TRIAD, ON  
+/replot 
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,-1
+/ANG,1  
+/REP,FAST   
+/VIEW,1,-1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,-1
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+! K, 1, 18.278, 0, 0
+/prep7  
+k, 1, 18.278,0,0
+allsel  
+kplot   
+k, 2, 26.778, 0, 0  
+k, 0, 0,  -42.750   
+k,3, 0, 0, -49.250  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+kplot   
+kdele, 0
+kdele, 3
+kdele, 4
+klist   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:44:08
+!*  
+! K,1,18.278,0,0
+! K,2,26.778,0,0
+! K,3, 0,0,-42.750  
+! K,4, 0,0,-49.250  
+/prep7  
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+/REPLOT,RESIZE  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+FLST,3,8,8  
+FITEM,3,18.4,-7.1,0 
+FITEM,3,17.8,-16.05,0   
+FITEM,3,14.9,-27.95,0   
+FITEM,3,7.9,-37.9,0 
+FITEM,3,26.3,-7.35,0
+FITEM,3,25.1,-18.15,0   
+FITEM,3,20.75,-32.8,0   
+FITEM,3,10.05,-44.7,0   
+K, ,P51X
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:44:48
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:45:36
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+! /CLEAR,NOSTART
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+!K,3, 0,0,-42.750   
+!K,4, 0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:46:27
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:46:31
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+!K,3, 0,0,-42.750   
+!K,4, 0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+! /CLEAR,NOSTART
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+!K,3, 0,0,-42.750   
+!K,4, 0,0,-49.250   
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       6,       10 
+/REPLOT,RESIZE  
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,-1  
+/ANG,1  
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:47:30
+!*  
+/REPLOT,RESIZE  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:47:33
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+!K,3, 0,0,-42.750   
+!K,4, 0,0,-49.250   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:47:54
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:48:01
+/prep7  
+CSYS, 2 
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,0.729,1 
+/REP,FAST   
+k, 11, 0, 0, -42.750
+kdele, 11   
+k,11,0, 0, 42.750   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+kdele, 11   
+LSTR,       6,      10  
+LSTR,       1,       2  
+/REPLOT,RESIZE  
+FLST,3,5,3  
+FITEM,3,6   
+FITEM,3,5   
+FITEM,3,4   
+FITEM,3,3   
+FITEM,3,1   
+BSPLIN, ,P51X   
+FLST,3,5,3  
+FITEM,3,10  
+FITEM,3,9   
+FITEM,3,8   
+FITEM,3,7   
+FITEM,3,2   
+BSPLIN, ,P51X   
+lplot   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+FLST,2,4,4  
+FITEM,2,3   
+FITEM,2,1   
+FITEM,2,4   
+FITEM,2,2   
+AL,P51X 
+FLST,2,1,5,ORDE,1   
+FITEM,2,1   
+FLST,8,2,3  
+FITEM,8,6   
+FITEM,8,10  
+VROTAT,P51X, , , , , ,P51X, ,360,4, 
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/DIST,1,1.37174211248,1 
+/REP,FAST   
+/USER,  1   
+/VIEW,  1,  0.226796748370E-01, -0.460243350717    ,  0.887503065048
+/ANG,   1,  -1.43295557674  
+/REPLO  
+/VIEW,  1, -0.150128537849    , -0.980172149836    ,  0.129321223352
+/ANG,   1,   44.7524157710  
+/REPLO  
+/VIEW,  1, -0.131101678004    , -0.990480178487    , -0.419686317202E-01
+/ANG,   1,   102.586510306  
+/REPLO  
+/VIEW,  1, -0.200581691052    , -0.976858464222    , -0.742598551896E-01
+/ANG,   1,   105.108348920  
+/REPLO  
+/VIEW,  1, -0.440886102199    , -0.892176359776    , -0.981875142012E-01
+/ANG,   1,   97.6765882586  
+/REPLO  
+/VIEW,  1, -0.364955580890    , -0.588811595481E-01,  0.929161144811
+/ANG,   1,   36.7606251651  
+/REPLO  
+/VIEW,  1, -0.582154077122    , -0.732465877761    ,  0.352973608652
+/ANG,   1,   54.0603013130  
+/REPLO  
+/VIEW,  1, -0.552426721576    , -0.828394938300    , -0.926636038938E-01
+/ANG,   1,   86.4722550635  
+/REPLO  
+/REPLO  
+/VIEW,  1, -0.561686726592    , -0.825160488510    ,  0.601513871115E-01
+/ANG,   1,   73.5566099340  
+/REPLO  
+/VIEW,  1, -0.465025792312    , -0.535395986245    ,  0.705054714471
+/ANG,   1,   36.8456749155  
+/REPLO  
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,-1
+/ANG,1  
+/REP,FAST   
+/VIEW,  1, -0.984885358477E-02,  0.999230469931    , -0.379666701803E-01
+/ANG,   1,   19.4889206306  
+/REPLO  
+/VIEW,  1, -0.121097711977    ,  0.977610556918    ,  0.172084116516
+/ANG,   1,   149.507736336  
+/REPLO  
+/VIEW,  1, -0.590837331337    ,  0.805550970444    ,  0.447088572321E-01
+/ANG,   1,   102.253856090  
+/REPLO  
+/VIEW,  1, -0.532360848568    ,  0.492903028015    ,  0.688214016049
+/ANG,   1,   135.520530215  
+/REPLO  
+/VIEW,  1, -0.427421450628    ,  0.111738385859    ,  0.897120636630
+/ANG,   1,   139.480548423  
+/REPLO  
+/VIEW,  1, -0.860814898346    ,  0.409584117590    ,  0.302057215446
+/ANG,   1,   127.716696428  
+/REPLO  
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:50:51
+!*  
+/REPLOT,RESIZE  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       15:51:05
+/prep7  
+!CSYS, 2
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/REPLOT,RESIZE  
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+/REPLOT,RESIZE  
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+FLST,2,4,4  
+FITEM,2,3   
+FITEM,2,2   
+FITEM,2,4   
+FITEM,2,1   
+AL,P51X 
+FLST,2,1,5,ORDE,1   
+FITEM,2,1   
+FLST,8,2,3  
+FITEM,8,3   
+FITEM,8,4   
+VROTAT,P51X, , , , , ,P51X, ,360,4, 
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+SAVE,'z_oriented_lv','db','D:\Life\Education\PhD\RootNode\2018\FEA\ansys_gr_updated\test_functions\create_lv_mesh\' 
+!*  
+ET,1,SOLID185   
+!*  
+SAVE
+SAVE
+SAVE
+SAVE
+/UI,MESH,OFF
+lplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,5,4,ORDE,5   
+FITEM,5,1   
+FITEM,5,-2  
+FITEM,5,7   
+FITEM,5,12  
+FITEM,5,17  
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,4, , , , ,1  
+!*  
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,8,4,ORDE,6   
+FITEM,5,3   
+FITEM,5,-6  
+FITEM,5,10  
+FITEM,5,-11 
+FITEM,5,15  
+FITEM,5,-16 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,24, , , , ,1 
+!*  
+FLST,5,4,6,ORDE,2   
+FITEM,5,1   
+FITEM,5,-4  
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VSWEEP,_Y1  
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+FLST,2,4,6,ORDE,2   
+FITEM,2,1   
+FITEM,2,-4  
+VCLEAR,P51X 
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+FLST,5,4,6,ORDE,2   
+FITEM,5,1   
+FITEM,5,-4  
+CM,_Y,VOLU  
+VSEL, , , ,P51X 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+elist   
+nlist   
+/UI,MESH,OFF
+nsel,z,loc,y,0  
+nplot   
+allsel  
+nplot   
+nsel,s,z,loc,0  
+nsel,s,loc,z,0  
+nplot   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+allsel  
+eplot   
+ASEL, s, , , 2  
+ASEL, a, , , 6  
+ASEL, a, , , 10 
+ASEL, a, , , 14 
+CM, INNER_SURFACE, AREA 
+NSLA, S, 1  
+nplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+allsel  
+nplot   
+ASEL, s, , , 2  
+ASEL, a, , , 6  
+ASEL, a, , , 10 
+ASEL, a, , , 14 
+CM, INNER_SURFACE, AREA 
+NSLA, S, 1  
+nplot   
+nlist   
+allsel  
+eplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/type,1,5   
+/replot 
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+SAVE
+FINISH  
+! /EXIT,MODEL   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:24:58
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+/PREP7  
+WPSTYLE,,,,,,,,0
+!*  
+ET,1,SOLID185   
+!*  
+BLC4,0,0,1,1,1  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,12,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-12 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,1, , , , , , ,1  
+!*  
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/UI,MESH,OFF
+nlist   
+csys,2  
+/replot 
+nlist   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:26:07
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:26:12
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CSYS,2  
+BLC4,0,0,1,1,1  
+FLST,5,12,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-12 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,1, , , , , , ,1  
+!*  
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/UI,MESH,OFF
+nlist   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:27:23
+!*  
+FINISH  
+! /EXIT,NOSAV   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:28:42
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+CSWPLA,15,2,1,1,
+csys,15 
+/replot 
+/triad, on  
+/replot 
+/triad, off 
+/replot 
+/triad,on   
+/replot 
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+BLC4,0,0,1,1,1  
+FLST,5,12,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-12 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,1, , , , , , ,1  
+!*  
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+nlist   
+FINISH  
+! /EXIT,NOSAV   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:35:10
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:35:40
+/prep7  
+!CSYS, 2
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+FLST,2,8,3,ORDE,2   
+FITEM,2,5   
+FITEM,2,-12 
+KDELE,P51X  
+kplot   
+/PNUM,KP,1  
+/PNUM,LINE,0
+/PNUM,AREA,0
+/PNUM,VOLU,0
+/PNUM,NODE,0
+/PNUM,TABN,0
+/PNUM,SVAL,0
+/NUMBER,0   
+!*  
+/PNUM,ELEM,0
+/REPLOT 
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+FLST,3,10,8 
+FITEM,3,21.35,7.75,0
+FITEM,3,22.9,15.6,0 
+FITEM,3,23.65,22,0  
+FITEM,3,20.65,28,0  
+FITEM,3,28.4,9.1,0  
+FITEM,3,28.95,17.2,0
+FITEM,3,28.2,24.65,0
+FITEM,3,24.85,31.15,0   
+FITEM,3,20.4,33.6,0 
+FITEM,3,16.85,28.15,0   
+K, ,P51X
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:37:42
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:37:45
+/prep7  
+!CSYS, 2
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+LSTR,       1,       2  
+LSTR,       3,       4  
+FLST,3,6,3  
+FITEM,3,1   
+FITEM,3,5   
+FITEM,3,6   
+FITEM,3,7   
+FITEM,3,8   
+FITEM,3,3   
+BSPLIN, ,P51X   
+FLST,3,6,3  
+FITEM,3,2   
+FITEM,3,9   
+FITEM,3,10  
+FITEM,3,11  
+FITEM,3,12  
+FITEM,3,4   
+BSPLIN, ,P51X   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+FLST,2,8,3,ORDE,2   
+FITEM,2,5   
+FITEM,2,-12 
+KDELE,P51X  
+!*  
+KFILL,3,1,5, , ,1,  
+lplot   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:38:42
+!*  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:38:51
+/prep7  
+!CSYS, 2
+K,1,18.278,0,0  
+K,2,26.778,0,0  
+K,3, 0,0,-42.750
+K,4, 0,0,-49.250
+FLST,3,8,8  
+FITEM,3,18.4,0, -7.1
+FITEM,3,17.8,0, -16.05  
+FITEM,3,14.9,0,-27.95   
+FITEM,3,7.9,0,-37.9 
+FITEM,3,26.3,0,-7.35
+FITEM,3,25.1,0,-18.15   
+FITEM,3,20.75,0,-32.8   
+FITEM,3,10.05,0,-44.7   
+K, ,P51X
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+FLST,2,8,3,ORDE,2   
+FITEM,2,5   
+FITEM,2,-12 
+KDELE,P51X  
+kplot   
+!*  
+KFILL,3,1,1,5, ,1,  
+KDELE,       5  
+kplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,-1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,-1
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       11:40:02
+!*  
+FINISH  
+! /EXIT,NOSAV   

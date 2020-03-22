@@ -1,0 +1,4 @@
+myocardium=./ansysdata/almost_ideal_lv/5mm/
+strip=./ansysdata/strip_10cm/
+cube=./ansysdata/cube/
+soleus=./ansysdata/soleus/

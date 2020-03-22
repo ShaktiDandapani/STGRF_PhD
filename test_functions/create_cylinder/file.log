@@ -1,0 +1,578 @@
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       17:50:17
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CYL4,0,0,10, ,12, ,20   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,8, , , , ,1  
+!*  
+MSHAPE,0,3D 
+MSHKEY,1
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+FLST,2,20,4,ORDE,2  
+FITEM,2,1   
+FITEM,2,-20 
+LESIZE,P51X, , ,-1, ,1  
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,1, ,0, , , , ,1  
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/USER,  1   
+/VIEW,  1,  0.885522185894    , -0.163275712060    ,  0.434961492710
+/ANG,   1,   8.15438800589  
+/REPLO  
+/VIEW,  1,  0.740299054095    ,  0.128300901822E-01,  0.672155264274
+/ANG,   1,   9.41925216965  
+/REPLO  
+FLST,2,20,4,ORDE,2  
+FITEM,2,1   
+FITEM,2,-20 
+LESIZE,P51X, , ,-1, ,1  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+lplot   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,16,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-16 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,12, , , , ,1 
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,4,4,ORDE,2   
+FITEM,5,17  
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,24, , , , ,1 
+!*  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VSWEEP,_Y1  
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,  1,  0.228349886698    ,  0.153400125451E-01,  0.973458275048
+/ANG,   1,  0.193266034627  
+/REPLO  
+/VIEW,  1,  0.694426598522    ,  0.955212067079E-01,  0.713195203528
+/ANG,   1,   2.05118486961  
+/REPLO  
+/VIEW,  1,  0.708851879974    ,  0.105165832576    ,  0.697473411620
+/ANG,   1,   2.17122003551  
+/REPLO  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+SAVE
+SAVE
+SAVE
+nlist   
+elist   
+nsel,s,loc,z,0  
+nsel,a,loc,z,20 
+nplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+allsel  
+nplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+allsel  
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+eplot   
+/type,1,5   
+/replot 
+/cplane,0   
+/replot 
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/type,1,2   
+/replot 
+SAVE
+/REPLOT,RESIZE  
+FINISH  
+! /EXIT,MODEL   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:13:18
+/input,menust,tmp,''
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       18:13:18
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+eplot   
+allsel  
+/REPLOT,RESIZE  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/cplane,0   
+/type,1,5   
+/replot 
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+FINISH  
+! /EXIT,MODEL   
+/BATCH  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:51:48
+/input,menust,tmp,''
+/GRA,POWER
+/GST,ON
+/PLO,INFO,3
+/GRO,CURL,ON
+/CPLANE,1   
+/REPLOT,RESIZE  
+WPSTYLE,,,,,,,,0
+/REPLOT,RESIZE  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CYL4,0,0,35.175, ,11, ,100  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:52:41
+!*  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CYL4,0,0,35, ,42, ,100  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE Release 16.1      BUILD 16.1      UP20150325       00:53:17
+!*  
+/PREP7  
+!*  
+ET,1,SOLID185   
+!*  
+CYL4,0,0,35.175, ,46.175, ,1000 
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1,2, , , , , , ,1  
+!*  
+MSHAPE,1,3D 
+MSHKEY,0
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VMESH,_Y1   
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+VCLEAR,       1 
+FLST,2,20,4,ORDE,2  
+FITEM,2,1   
+FITEM,2,-20 
+LESIZE,P51X, , ,-1, ,1  
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,2, , , , ,1  
+!*  
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,24, , , , ,1 
+!*  
+VCLEAR,       1 
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+lplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,2,20,4,ORDE,2  
+FITEM,2,1   
+FITEM,2,-20 
+LESIZE,P51X, , ,-1, ,1  
+lplot   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+FLST,5,20,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+/REPLOT,RESIZE  
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FLST,5,16,4,ORDE,2  
+FITEM,5,1   
+FITEM,5,-16 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,12, , , , ,1 
+!*  
+FLST,5,4,4,ORDE,2   
+FITEM,5,17  
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,24, , , , ,1 
+!*  
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VSWEEP,_Y1  
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+VCLEAR,       1 
+lplot   
+FLST,5,4,4,ORDE,2   
+FITEM,5,17  
+FITEM,5,-20 
+CM,_Y,LINE  
+LSEL, , , ,P51X 
+CM,_Y1,LINE 
+CMSEL,,_Y   
+!*  
+LESIZE,_Y1, , ,48, , , , ,1 
+!*  
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+CM,_Y,VOLU  
+VSEL, , , ,       1 
+CM,_Y1,VOLU 
+CHKMSH,'VOLU'   
+CMSEL,S,_Y  
+!*  
+VSWEEP,_Y1  
+!*  
+CMDELE,_Y   
+CMDELE,_Y1  
+CMDELE,_Y2  
+!*  
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+nsel,s,loc,z,0  
+nsel,a,loc,z,10000  
+nplot   
+nsel,a,loc,z,10000  
+nplot   
+allsel  
+nplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+nlist   
+elist   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+nlist   
+nsel,s,loc,z,0  
+nsel,a,loc,z,1000   
+nplot   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+nlist   
+allsel  
+nplot   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,,1 
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,2,3   
+/ANG,1  
+/REP,FAST   
+/cplane,0   
+/type,1,5   
+eplot   
+/VIEW,1,1   
+/ANG,1  
+/REP,FAST   
+/VIEW,1,,1  
+/ANG,1  
+/REP,FAST   
+/VIEW,1,1,1,1   
+/ANG,1  
+/REP,FAST   
+FINISH  
+! /EXIT,MODEL   

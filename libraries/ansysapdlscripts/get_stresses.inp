@@ -1,0 +1,5 @@
+/POST1
+/OUTPUT,stress_list,txt
+/FORMAT,10,,18,5
+PRESOL,S,PRIN
+/OUT

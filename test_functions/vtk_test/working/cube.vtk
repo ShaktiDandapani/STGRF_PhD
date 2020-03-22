@@ -1,0 +1,21 @@
+# vtk DataFile Version 4.2
+cube vtk without fibres (or just fibres)
+ASCII
+
+DATASET UNSTRUCTURED_GRID
+POINTS 8 float 
+0.0 0.0 0.0 
+1.0 0.0 0.0 
+1.0 1.0 0.0
+0.0 1.0 0.0 
+0.0 1.0 1.0 
+0.0 0.0 1.0 
+1.0 0.0 1.0 
+1.0 1.0 1.0
+
+CELLS 1 9 
+8 0 1 2 3 5 6 7 4
+
+CELL_TYPES 1
+12 
+

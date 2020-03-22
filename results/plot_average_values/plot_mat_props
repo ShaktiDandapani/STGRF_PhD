@@ -1,0 +1,140 @@
+import csv
+import seaborn as sns
+import matplotlib.pyplot as plt
+from collections import defaultdict
+import matplotlib.style as style
+import matplotlib
+
+
+def set_seaborn_parameters():
+    # sns.set('paper')
+    # sns.set_context('notebook')
+    # sns.set_style('whitegrid')
+
+    style.use('seaborn-poster')
+    style.use('ggplot')
+    style.use('seaborn-whitegrid')
+    matplotlib.rcParams.update({'font.size': 18,
+                                'font.family': "serif"})
+    # matplotlib.rcParams[] =
+    return 1
+
+def plot_result(title, xlabel, ylabel, x_data, y_data, marker, label):
+
+    plt.figure()
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.plot(x_data, y_data, marker, label=label)
+    # plt.grid()
+    plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+    plt.legend(frameon=True)
+
+def read_mat_props(filename):
+
+    sv_c = []
+    sv_k1 = []
+    sv_k2 = []
+    sv_k3 = []
+    sv_k4 = []
+    sv_time = []
+    sv_m_c_i4 = []
+    sv_m_c_i6 = []
+
+    mat_results = defaultdict()
+
+    with open(filename, 'r') as mat_file:
+        reader = csv.reader(mat_file, delimiter=',', quotechar='|')
+        next(reader)
+        for row in reader:
+            c = float(row[0])
+            k1 = float(row[1])
+            k2 = float(row[2])
+            k3 = float(row[3])
+            k4 = float(row[4])
+            m_gm = float(row[5])
+            m_c_i4 = float(row[6])
+            m_c_i6 = float(row[7])
+            time = int(row[8])
+
+            sv_c.append(c)
+            sv_k1.append(k1)
+            sv_k2.append(k2)
+            sv_k3.append(k3)
+            sv_k4.append(k4)
+            sv_m_c_i4.append(m_c_i4)
+            sv_m_c_i6.append(m_c_i6)
+            sv_time.append(time)
+
+    mat_results['c'] = sv_c
+    mat_results['k1'] = sv_k1
+    mat_results['k2'] = sv_k2
+    mat_results['k3'] = sv_k3
+    mat_results['k4'] = sv_k4
+    mat_results['m_c_i4'] = sv_m_c_i4
+    mat_results['m_c_i6'] = sv_m_c_i6
+    mat_results['time'] = sv_time
+
+    return mat_results
+
+def main():
+
+    set_seaborn_parameters()
+
+    # Change the file name variable to obtain the averaged results as needed.
+    mat_file_no_evo = "./no_evo/mat_props.csv"
+    mat_file_evo = "./evo/mat_props.csv"
+    mat_results = read_mat_props(mat_file_evo)
+
+    plot_result('Time (in Days)', 'Material Parameter', r'c', mat_results['time'], mat_results['c'], 'k--', 'c')
+    plot_result('Time (in Days)', 'Material Parameter', r'$k_2$', mat_results['time'], mat_results['k2'], 'k--',
+                r'$k_2$')
+    plot_result('Time (in Days)', 'Material Parameter', r'$k_4$', mat_results['time'], mat_results['k4'], 'k--',
+                r'$k_4$')
+    plot_result('Time (in Days)', 'Mass Density', r'$m^{C, I_4}$', mat_results['time'], mat_results['m_c_i4'], 'k--',
+                r'$m^{C, I_4}$')
+    plot_result('Time (in Days)', 'Mass Density', r'$m^{C, I_6}$', mat_results['time'], mat_results['m_c_i6'], 'k--',
+                r'$m^{C, I_6}$')
+
+    plt.show()
+
+if __name__ == '__main__':
+    main()
+
+# def read_mat_csv_file(filename):
+#     # Muscle
+#     sv_k1m = []
+#     sv_k2m = []
+#
+#     # Tendon
+#     sv_k1t = []
+#     sv_k2t = []
+#
+#     # Time
+#     sv_time = []
+#
+#     mat_results = defaultdict()
+#
+#     with open(filename ,'r') as matcsvfile:
+#         reader = csv.reader(matcsvfile, delimiter=',', quotechar='|')
+#         next(reader)
+#         for row in reader:
+#             k1m = float(row[0])
+#             k2m = float(row[1])
+#             k1t = float(row[2])
+#             k2t = float(row[3])
+#             time = float(row[4]) * 0.5
+#
+#             sv_k1m.append(k1m)
+#             sv_k2m.append(k2m)
+#             sv_k1t.append(k1t)
+#             sv_k2t.append(k2t)
+#             sv_time.append(time)
+#
+#     mat_results['k1m'] = sv_k1m
+#     mat_results['k2m'] = sv_k2m
+#     mat_results['k1t'] = sv_k1t
+#     mat_results['k2t'] = sv_k2t
+#     mat_results['time'] = sv_time
+#
+#     return mat_results
